@@ -1,0 +1,71 @@
+# -----------------------------------------------------
+# 🔧 IDEs and editors
+# -----------------------------------------------------
+.idea/
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# -----------------------------------------------------
+# ⚙️ Compilazione e build
+# -----------------------------------------------------
+/dist
+/out-tsc
+/tmp
+/.angular/cache
+/bazel-out
+/.sass-cache
+/temp/
+.libpeerconnection.log
+testem.log
+
+# -----------------------------------------------------
+# 📦 Dipendenze e gestori pacchetti
+# -----------------------------------------------------
+/node_modules/
+package-lock.json
+# yarn.lock (decommenta se usi yarn)
+# yarn.lock
+
+# -----------------------------------------------------
+# 📄 Log e cache
+# -----------------------------------------------------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/connect.lock
+.eslintcache
+
+# -----------------------------------------------------
+# 🧪 Test e coverage
+# -----------------------------------------------------
+/coverage
+
+# -----------------------------------------------------
+# 📝 Altri file generati o temporanei
+# -----------------------------------------------------
+/typings
+*.swp
+*.swo
+*.bak
+
+# -----------------------------------------------------
+# 💻 File di sistema (OS)
+# -----------------------------------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------------------------------
+# 🌍 Angular environments (opzionale ignorarli)
+# -----------------------------------------------------
+# !src/environments/environment.prod.ts
+# !src/environments/environment.ts

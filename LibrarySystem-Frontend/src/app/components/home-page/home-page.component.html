@@ -1,0 +1,44 @@
+<div class="backgroundHomePage">
+    <div class="container">
+        <div class="main">
+            <h1>Home Page</h1>
+            <p class="btn-primary">Welcome to your home page, {{ user?.username }}!!
+                <br> Your library member ID is {{ user?.libraryMemberId}}.
+                Below, you can find all your borrowed books.</p>
+        </div>
+        <div class="container-homePage">
+            <a class="btn-default" routerLink="/searchBook">Search for Books</a>
+        </div>
+
+        <div class="container-homePage2">
+            <a class="btn-default" routerLink="/searchBookFull">Search for advanced books</a>
+        </div>
+    </div>
+</div>
+
+<h2 class="text-HomePage">Your books:</h2>
+<div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
+    <a *ngFor="let book of borrowedBooks" [routerLink]="['/detailBooksBorrowed', book?.title]" class="carousel-cell">
+        <table>
+            <tr class="text-ListPage">{{ book?.title }}</tr>
+        </table>
+    </a>
+</div>
+
+<h2 class="text-HomePage">Books that you can borrow:</h2>
+<div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
+    <a *ngFor="let book of listAllBooks" [routerLink]="['/detailBooks', book?.title]" class="carousel-cell">
+        <table>
+            <tr class="text-ListPage">{{ book?.title }}</tr>
+        </table>
+    </a>
+</div>
+
+<h2 class="text-HomePage">Historical books:</h2>
+<div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
+    <a *ngFor="let book of historianBooks" [routerLink]="['/detailBooks', book?.title]" class="carousel-cell">
+        <table>
+            <tr class="text-ListPage">{{ book?.title }}</tr> 
+        </table>
+    </a>
+</div>

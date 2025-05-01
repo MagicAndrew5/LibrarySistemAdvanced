@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <!--Linking to CSS-->
+    <link type="text/css" rel="stylesheet" th:href="@{/basicStyle.css}"/>
+    <title>Search</title>
+</head>
+
+<body>
+
+
+    <div class="backgroundSearchBook">
+        <div class="container">
+            <div class="main">
+                <h1>Search</h1>
+                <p class="btn-primary">Search for a book in the library, you may wish to reserve it if available!</p>
+            </div>
+        </div>
+
+        <div>
+            <form th:action="@{/searchBooks}" method="post" th:object="${books}" class="Form2">
+                <div class="Form3">
+                    <h1 class="centered-text">Search For A Book:</h1>
+                    <input type="text" th:field="*{ISBN}" placeholder="ISBN" id="ISBN" />
+                    <input type="text" th:field="*{author}" placeholder="Author" id="author" />
+                    <input type="text" th:field="*{title}" placeholder="Title" id="title" />
+
+                    <input type="checkbox" id="ebooksOnly" name="ebooksOnly" />
+                    <label class="btn-searchEbook" for="ebooksOnly">Search EBooks only</label>
+
+                    <input class="cool-button-searchbook" name="submit" th:type="submit" value="Search" />
+
+
+                    <div th:if="${message}" id="message-box" class="alert alert-danger">
+                        [[${message}]]
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".alert").fadeOut('slow');
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

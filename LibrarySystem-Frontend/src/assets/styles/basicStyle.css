@@ -1,0 +1,556 @@
+html, body
+{
+    margin: 0;
+    padding: 0;
+}
+
+/* Background image for menu, making sure no repeats */
+.background
+{
+    background: url('images/StartPage.png') no-repeat center center fixed;
+    background-size: cover;
+   /* height: 1300px;*/
+    height: 100vh
+}
+
+/* Background image for menu, making sure no repeats */
+.backgroundSign
+{
+    background: url('images/SignInPic2.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh
+}
+
+/* Background image for menu, making sure no repeats */
+.backgroundRegistration
+{
+    background: url('images/RegistrationPic.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh
+}
+
+.backgroundSearchBook
+{
+    background: url('images/SearchPage2.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh
+}
+
+.backgroundHomePage
+{
+    background: url('images/HomePage.jpg') no-repeat center center ;
+    background-size: cover;
+    height: 400px;
+}
+
+.backgroundListBook
+{
+    background: url('images/ListbookPageImage.jpg') no-repeat center center ;
+    background-size: cover;
+    height: 100vh
+
+}
+
+.backgroundSearchBookFull
+{
+    background: url('images/SearchAdvanceImage.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh
+}
+
+/* Perfecting the size of the 3 buttons down */
+.container
+{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+
+/* Positioning for lower page */
+.supporting
+{
+    padding-top: 300px;
+    padding-bottom: 100px;
+}
+
+/* Position of Top Page */
+.main
+{
+    position: relative;
+    top: 130px;
+    text-align: center;
+}
+
+
+/* Title of Page */
+.main h1
+{
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 60px;
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 80px;
+    text-transform: uppercase;
+}
+
+.remain
+{
+    position: relative;
+    padding-top: 80px;
+    text-align: center;
+}
+
+/* Title of Page */
+.remain h1
+{
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 70px;
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 80px;
+    text-transform: uppercase;
+}
+
+/* Description after title */
+.btn-primary
+{
+    background-color: rgba(100, 100, 100, 0.5);
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 1.3px;
+    padding: 16px 40px;
+    text-decoration: none;
+    border-radius: 25px;
+}
+
+.btn-searchEbook {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.cool-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #06ad8d;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.cool-button-bookinformation {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #074709;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.cool-button-searchbook {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #074709;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-left: 170px;
+}
+
+
+/* The three bottons */
+.btn-default
+{
+    border: 1px solid #ffffff;
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 1.3px;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.container-homePage {
+    position: absolute;
+    top: 30px; /* Distanza dal top */
+    right: 50px; /* Distanza dal right */
+    padding: 5px;
+}
+
+.container-homePage2 {
+    position: absolute;
+    top: 80px; /* Distanza dal top */
+    right: 50px; /* Distanza dal right */
+
+
+}
+
+.container-homePage + .btn-default {
+    display: block;
+    margin-bottom: 10px; /* Aggiunge spazio tra i bottoni */
+}
+
+.col
+{
+    color: #ffffff;
+    float: none;
+    width: 50%;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.ion-icon{
+    font-size: 64px;
+    color: #38ea10;
+}
+
+.centered-text {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+}
+
+
+
+.text-HomePage{
+    text-align: left;
+    font-family: 'Raleway', sans-serif;
+    margin-left: 10px;
+}
+.text-SignIn{
+    text-align: left;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    margin-left: 10px;
+}
+.text-SignInTh{
+
+    color: #06ad8d;
+    font-family: 'Raleway', sans-serif;
+    margin-left: 10px;
+}
+.text-ListPage{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-family: 'Raleway', sans-serif;
+    margin: 10px;
+    font-size: 20px;
+}
+
+.text-ListPage2{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-family: 'Raleway', sans-serif;
+    margin-left: 10px;
+
+}
+.text-ListPage3{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-family: 'Raleway', sans-serif;
+    margin: 10px;
+}
+
+/* Lining */
+.clearfix
+{
+    clear: both;
+}
+
+.Form {
+    background-color: rgba(255, 255, 255, 0.3); /* Imposta l'opacità del colore di sfondo */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+.Form2 {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+    width: 70%;
+    padding: 10px;
+}
+
+
+.Form3 {
+    background-color: rgba(255, 255, 255, 0.3); /* Imposta l'opacità del colore di sfondo */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 150px auto;
+}
+
+
+
+.Form4 {
+    background-color: rgba(255, 255, 255, 0.3); /* Imposta l'opacità del colore di sfondo */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 180px auto;
+
+}
+
+
+.Form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+    margin-top: 100px;
+}
+
+.FormListBook {
+    background-color: rgba(255, 255, 255, 0.3); /* Imposta l'opacità del colore di sfondo */
+    padding: 30px;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+    flex: 1;
+
+}
+
+.FormListBook2 {
+    /* Stili per il div FormListBook */
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 80%; /* Larghezza massima del div */
+    overflow: hidden; /* Nasconde il contenuto in eccesso */
+}
+.FormListBook3 {
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 30px; /* Aumenta il padding per dare più spazio */
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Aumenta la larghezza massima del form */
+    margin-top: 200px;
+    flex: 1;
+    width: auto;
+    height: auto; /* Altezza automatica per adattarsi al contenuto */
+}
+
+.FormListBook4 {
+    background-color: rgba(255, 255, 255, 0.3); /* Imposta l'opacità del colore di sfondo */
+    padding: 30px;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin-left: 50px;
+    flex: 1;
+}
+
+
+
+
+table {
+    width: 100%; /* Larghezza della tabella al 100% del contenitore */
+    table-layout: auto; /* Fissa la larghezza della tabella */
+}
+
+.Form h1 {
+    color: #ffffff; /* White text color */
+    font-size: 30px; /* Smaller font size */
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    margin-top: 0;
+    text-align: center;
+}
+
+/* Form styles */
+form input[type="text"], form input[type="password"] {
+    width: calc(100% - 25px); /* Larghezza al 100% meno 15px per il bordo a destra */
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+}
+
+.form button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    border: none;
+}
+
+.loginHeader
+{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    padding: 40px;
+}
+
+/* da capire se sono da usare o meno*/
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Flexbox layout for the form */
+.search-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px; /* Adjust as needed */
+}
+.carousel-cell{
+    height: 280px;
+    width: 250px;
+   /* background-color: rgba(171, 66, 0, 0.9);*/
+    line-height: 270px;
+    text-align: center;
+    margin-right: 40px;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Raleway', cursive;
+    /* background: url('images/BookCover2.jpeg') no-repeat center center fixed; */
+    background-color: #ac7156;
+
+}
+
+/* styles.css */
+
+.book-info {
+    height: 280px;
+    width: 250px;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.book-details {
+    margin-left: 20px;
+}
+
+img {
+    max-width: 100px;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+
+
+.table-container table td {
+    display: block;
+    margin-bottom: 5px; /* Adjust the margin between table items */
+}
+
+.tableListBook {
+    border-collapse: collapse;
+    width: 70%;
+    margin: 20px;
+}
+
+.tableBookInformation {
+    border-collapse: collapse;
+    width: 70%;
+    border: 2px solid black;
+    margin: 20px;
+}
+
+th, td {
+
+    text-align: left;
+    padding: 10px; /* Aumenta lo spazio interno delle celle */
+    white-space: nowrap; /* Impedisce al testo di andare a capo */
+    overflow: hidden; /* Nasconde eventuali testi in eccesso */
+    text-overflow: ellipsis; /* Aggiunge puntini se il testo è troppo lungo */
+    border-bottom: 1px solid #ddd;
+    color: #ffffff;
+}
+.th {
+    background-color: #ffffff;
+}
+
+.th-bookInformation, .td-bookInformation {
+
+    padding: 8px;
+    text-align: left;
+    color: black;
+    border-bottom: 1px solid #000000;
+
+}
+.th-bookInformation {
+    color: black;
+    background-color: #f2f2f2;
+}
+
+.Form-container {
+    display: flex;
+    align-items: center;
+}
+
+.image-slot {
+
+    margin-right: 20px; /* Adjust as needed */
+    border-color: white;
+}
+
+/* Box del messaggio */
+.message-box {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+/* Stile del messaggio per errore */
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* ! Carousel */
+.main-carousel{
+    padding: 40px 0;
+}
+
+.carousel-cell{
+    height: 300px;
+    width: 250px;
+    background-color: #0067ab;
+    line-height: 270px;
+    text-align: center;
+    margin-right: 40px;
+}
