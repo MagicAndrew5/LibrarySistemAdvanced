@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit {
       new Flickity(carousel, {
         cellAlign: 'left',
         contain: true,
-        pageDots: false,
         wrapAround: true
       });
     }

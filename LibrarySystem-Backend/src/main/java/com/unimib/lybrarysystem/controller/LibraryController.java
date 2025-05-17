@@ -1,9 +1,6 @@
 package com.unimib.lybrarysystem.controller;
 
-import com.unimib.lybrarysystem.DTO.AccountDTO;
-import com.unimib.lybrarysystem.DTO.BookDTO;
-import com.unimib.lybrarysystem.DTO.GenreDTO;
-import com.unimib.lybrarysystem.DTO.UserDTO;
+import com.unimib.lybrarysystem.DTO.*;
 import com.unimib.lybrarysystem.mapper.BookMapper;
 import com.unimib.lybrarysystem.mapper.GenreMapper;
 import com.unimib.lybrarysystem.model.*;
@@ -107,47 +104,44 @@ public class LibraryController {
     /**
      * Handles the GET request for the full book search page.
      * Adds a new Book and Author object to the model for the search form.
-     *
-     * @param model The model to add attributes to.
      * @return The name of the full book search page view.
      */
-    @GetMapping("/searchBookFull")
-    public String showAdvancedSearchBook(Model model) {
-        model.addAttribute("searchBookDetails", new Book());
-        model.addAttribute("author", new Author());
-        return "SearchBookFull";
+    @GetMapping("/api/searchBookFull/")
+    public ResponseEntity<String> showAdvancedSearchBook() {
+        return ResponseEntity.ok("{\"message\": \"Welcome to the search advanced books page\"}");
+
     }
 
     /**
      * Handles the GET request for the book details page.
      * Retrieves a book from the repository that matches the provided ISBN and adds it to the model.
-     *
-     * @param model The model to add attributes to.
      * @param isbn The ISBN of the book to be retrieved.
      * @return The name of the book details page view.
      */
-    @GetMapping("/detailBooks/{isbn}")
-    public String showDetailBooks(Model model, @PathVariable("isbn") Integer isbn) {
+    @GetMapping(value = "/api/detailBooks/{isbn}/")
+    public ResponseEntity<BookDTO> getDetailBooks(@PathVariable("isbn") Integer isbn) {
+
         Book bookRetrieve = service.findBookByISBN(isbn);
-        Genre genreRetrieve = bookRetrieve.getGenreList();
-        model.addAttribute("bookDetails", bookRetrieve);
-        model.addAttribute("genre", genreRetrieve);
-        System.out.println("Book info: " + bookRetrieve);
-        return "BookInformation";
+        if (bookRetrieve == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        BookDTO bookRetrieveDTO = bookMapper.toDTO(bookRetrieve);
+        return ResponseEntity.ok(bookRetrieveDTO);
     }
 
-    @GetMapping("/detailBooksBorrowed/{isbn}")
-    public String showDetailBooksBorrowed(Model model, @PathVariable("isbn") Integer isbn) {
+    @GetMapping(value = "/api/detailBooksBorrowed/{isbn}/")
+    public ResponseEntity<BookDTO> getDetailBooksBorrowed(@PathVariable("isbn") Integer isbn) {
         Book bookRetrieve = service.findBookByISBN(isbn);
-        Genre genreRetrieve = bookRetrieve.getGenreList();
-        model.addAttribute("bookDetails", bookRetrieve);
-        model.addAttribute("genre", genreRetrieve);
-        System.out.println("Book info: " + bookRetrieve);
-        return "BookInformationBorrowed";
+        if (bookRetrieve == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        BookDTO bookRetrieveDTO = bookMapper.toDTO(bookRetrieve);
+        return ResponseEntity.ok(bookRetrieveDTO);
     }
 
     // ------------------- POST METHODS -------------------
-
     /**
      * Handles the POST request for checking user account.
      * @param user The user to check
@@ -156,7 +150,8 @@ public class LibraryController {
      */
     @PostMapping("/api/auth/checkaccount/")
     @ResponseBody
-    public ResponseEntity<?> checkAccount(@RequestBody User user, HttpSession session) {
+    public ResponseEntity<?> checkAccount(
+            @RequestBody User user, HttpSession session) {
         boolean validCheck = service.checkLoginAccount(user);
 
         if(validCheck) {
@@ -185,7 +180,8 @@ public class LibraryController {
      */
     @PostMapping("/api/auth/saveaccount/")
     @ResponseBody
-    public ResponseEntity<?> addNewAccount(@RequestBody AccountDTO accountDTO, HttpSession session) {
+    public ResponseEntity<?> addNewAccount(
+            @RequestBody AccountDTO accountDTO, HttpSession session) {
 
         boolean validAccount = service.checkSaveAccount(accountDTO.getUser(), accountDTO.getLibraryMember());
 
@@ -216,15 +212,17 @@ public class LibraryController {
             @RequestParam(required = false, defaultValue = "false") boolean ebooksOnly,
             @RequestBody BookDTO bookDTO) {
 
-        List<Book> foundBooks = new ArrayList<>();
-
+        List<Book> foundBooks;
         if(ebooksOnly) {
-            System.out.println("Ebooks only: " + bookDTO);
+            System.out.println("Ebook");
             foundBooks = service.findEBookByAttributes(bookDTO);
-        } else {
-            System.out.println("All books: " + bookDTO);
+        }
+        else {
+            System.out.println("Book");
             foundBooks = service.findBookByAttributes(bookDTO);
         }
+
+        System.out.println("Found books size: " + foundBooks.size());
 
         if (foundBooks.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -247,101 +245,45 @@ public class LibraryController {
         return ResponseEntity.ok(response);
     }
 
-
-    /*
-    @PostMapping("/searchBooks")
-    public String showListBook(@RequestParam(required = false) boolean ebooksOnly, Book book, Model model, RedirectAttributes ra) {
-
-        List<Genre> foundGenre = new ArrayList<>();
-
-        if(ebooksOnly) {
-            List<Book> foundBooks = service.findEBookByAttributes(book);
-            System.out.println(foundBooks);
-
-            for(int i = 0; i < foundBooks.size(); i++) {
-                Genre genre = foundBooks.get(i).getGenreList();
-                model.addAttribute("genres", genre);
-            }
-
-            model.addAttribute("foundBooks", foundBooks);
-            //model.addAttribute("books", new Book());
-
-            if(foundBooks.isEmpty()) {
-                ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
-                return "redirect:/searchBook";
-            }
-            else {
-                return "listBookPage";
-            }
-        }
-        else {
-            List<Book> foundBooks = service.findBookByAttributes(book);
-
-
-            for(int i = 0; i < foundBooks.size(); i++) {
-                Genre genre = foundBooks.get(i).getGenreList();
-                model.addAttribute("genres", genre);
-            }
-
-            model.addAttribute("foundBooks", foundBooks);
-            model.addAttribute("books", new Book());
-
-            if(foundBooks.isEmpty()) {
-                ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
-                return "redirect:/searchBook";
-            }
-            else {
-                return "listBookPage";
-            }
-        }
-    }
-    */
-
     /**
      * Handles the POST request for the advanced book search.
      * Retrieves books from the repository that match the provided publisher and author nationality and adds them to the model.
-     *
-     * @param publisher The publisher of the books to be retrieved.
-     * @param nationality The nationality of the author of the books to be retrieved.
-     * @param model The model to add attributes to.
      * @return The name of the book list page view.
      */
-    @PostMapping("/searchAdvancedBooks")
-    public String showListAdvancedBook(@RequestParam String publisher, @RequestParam String nationality, Model model, RedirectAttributes ra) {
-        // Search books with these parameters
-        List<Book> foundBooks = service.findBooksByPublisherAndAuthorNationality(publisher, nationality);
-        System.out.println("foundBooks Controller Info: " + foundBooks);
-        List<Genre> foundGenre = new ArrayList<>();
+    @PostMapping("/api/searchBookAdvanced/check/")
+    public ResponseEntity<?> searchBooksAdvanced(
+            @RequestBody AdvancedSearchDTO advancedSearchDTO) {
 
-        for(int i = 0; i < foundBooks.size(); i++) {
-            Genre genre = foundBooks.get(i).getGenreList();
-            foundGenre.add(genre);
-            model.addAttribute("genres", genre);
+        List<Book> foundBooks = service.findBooksByPublisherAndAuthorNationality(
+                advancedSearchDTO.getPublisher(), advancedSearchDTO.getAuthorNationality());
+
+        if (foundBooks.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", "Your search result generated no matches, please try again"));
         }
 
-        //model.addAttribute("genres", foundGenre);
-        model.addAttribute("foundBooks", foundBooks);
-        model.addAttribute("book", new Book());
+        List<BookDTO> bookDTOs = bookMapper.toDTOList(foundBooks);
+        List<String> genres = foundBooks.stream()
+                .map(book -> book.getGenreList().getName())
+                .distinct()
+                .toList();
 
-        if(foundBooks.isEmpty()) {
-            ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
-            return "redirect:/searchBookFull";
-        }
-        else {
-            return "listBookPage";
-        }
+        Map<String, Object> response = Map.of(
+                "foundBooks", bookDTOs,
+                "genres", genres
+        );
+
+        return ResponseEntity.ok(response);
     }
-
 
 
     /**
      * Handles the POST request for adding a book to a library member.
-     * @param model The model to add attributes to.
      * @param session The current HTTP session.
      * @return The name of the redirect view.
      */
     @PostMapping("/api/addBook/{isbn}/")
-    public ResponseEntity<String> addBook(Model model, @PathVariable("isbn") Integer isbn, HttpSession session) {
+    public ResponseEntity<String> addBook(@PathVariable("isbn") Integer isbn, HttpSession session) {
 
         LibraryMember libraryMember = (LibraryMember) session.getAttribute("actualLibraryMember");
 
@@ -357,32 +299,29 @@ public class LibraryController {
         session.setAttribute("actualBook", actualBook);
         service.addLinkBookToLibraryMember(actualBook, libraryMember);
 
-        //model.addAttribute("book", book);
-        //model.addAttribute("libraryMember", libraryMember);
-
         return ResponseEntity.ok("Book added to user's list");
     }
 
     /**
      * Handles the POST request for removing a book from a library member.
      * @param isbn The ISBN of the book to remove.
-     * @param model The model to add attributes to.
      * @param session The current HTTP session.
      * @return The name of the redirect view.
      */
-    @PostMapping("/removeBook/{isbn}")
-    public String removeBook(@PathVariable("isbn") Integer isbn, Model model, HttpSession session) {
+    @PostMapping("/api/removeBook/{isbn}/")
+    public ResponseEntity<String> removeBook(@PathVariable("isbn") Integer isbn, HttpSession session) {
 
         // Retrieve the actual libraryMember and actual book from the database
         LibraryMember libraryMember = (LibraryMember) session.getAttribute("actualLibraryMember");
-        Book actualBook = service.findBookByISBN(isbn);
+        if (libraryMember == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in.");
+        }
 
+        Book actualBook = service.findBookByISBN(isbn);
         // Remove the book from the library member
         service.removeBookFromLibraryMember(actualBook, libraryMember.getId());
 
-        model.addAttribute("bookRemove", actualBook);
-        model.addAttribute("libraryMemberRemove", libraryMember);
+        return ResponseEntity.ok("Book remove to user's list");
 
-        return "redirect:/HomePage";
     }
 }

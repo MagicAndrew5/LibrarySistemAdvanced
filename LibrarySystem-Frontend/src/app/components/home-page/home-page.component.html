@@ -23,7 +23,7 @@
   </div>
   
   <h2 class="section-title">📘 Available Books</h2>
-  <div class="main-carousel" data-flickity='{ "wrapAround":true}'>
+  <div class="main-carousel" data-flickity='{ "wrapAround":true, "cellAlign": "left", "contain": true }'>
     <div class="carousel-cell" *ngFor="let book of listAllBooks" [routerLink]="['/detailBooks', book?.isbn]">
       <div class="book-title">{{ book?.title }}</div>
     </div>

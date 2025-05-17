@@ -1,1 +1,39 @@
-<p>search-book-advanced works!</p>
+<div class="backgroundSearchBookFull">
+    <div class="container">
+      <div class="main">
+        <h1>Search</h1>
+        <p class="btn-primary">
+          Search for a book in the library, you may wish to reserve it if available!
+        </p>
+      </div>
+    </div>
+  
+    <div>
+      <form (ngSubmit)="onSubmit()" [formGroup]="searchForm" class="Form2">
+        <div class="Form3">
+          <h1 class="centered-text">Search For A Book:</h1>
+  
+          <input
+            type="text"
+            formControlName="publisher"
+            placeholder="Publisher"
+            id="publisher"
+          />
+  
+          <input
+            type="text"
+            formControlName="authorNationality"
+            placeholder="Nationality of author"
+            id="authorNationality"
+          />
+  
+          <input class="cool-button" type="submit" value="Search" />
+  
+          <div *ngIf="message" id="message-box" class="alert alert-danger">
+            {{ message }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

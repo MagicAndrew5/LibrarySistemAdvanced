@@ -1,5 +1,5 @@
-null,1,1,Book,Alberto Blu,Mondadori,Gli incubi,null
-null,2,2,Book,Giacomo Verde,Mondadori,L'unicorno,null
-null,3,3,Book,Luca Rosso,Feltrinelli,Il Killer,null
-null,4,4,Book,Simone Nero,Hoepli,Risata,null
-10,8,8,EBook,Luca Rosso,Feltrinelli,Il Killer,PDF
+Book,1,Alberto Blu,Mondadori,Gli incubi,0,null,1
+Book,2,Giacomo Verde,Mondadori,L'unicorno,0,null,2
+Book,3,Luca Rosso,Feltrinelli,Il Killer,0, null,3
+Book,4,Simone Nero,Hoepli,Risata,0,null,4
+EBook,8,Luca Rosso,Feltrinelli,Il Killer,10,PDF,8

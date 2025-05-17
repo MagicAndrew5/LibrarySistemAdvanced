@@ -1,1 +1,50 @@
-<p>book-details works!</p>
+<div class="backgroundHomePage">
+    <div class="container">
+      <div class="main">
+        <h1>Book Information</h1>
+        <p class="btn-primary">
+          This page will show you information about the selected book!
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="Form-container">
+    <!--
+      <div class="image-slot">
+        <img src="../../../assets/styles/images/BookCover.jpeg" alt="Book Cover" />
+      </div>
+    -->
+  
+    <div class="FormListBook4" *ngIf="bookDetails">
+      <table>
+        <tr>
+          <th class="th-bookInformation">ISBN</th>
+          <td class="td-bookInformation">{{ bookDetails.isbn || '-' }}</td>
+        </tr>
+        <tr>
+          <th class="th-bookInformation">Title</th>
+          <td class="td-bookInformation">{{ bookDetails.title || '-' }}</td>
+        </tr>
+        <tr>
+          <th class="th-bookInformation">Author</th>
+          <td class="td-bookInformation">{{ bookDetails.author || '-' }}</td>
+        </tr>
+        <tr>
+          <th class="th-bookInformation">Genre</th>
+          <td class="td-bookInformation">{{ bookDetails.genre?.name || '-' }}</td>
+        </tr>
+        <tr>
+          <th class="th-bookInformation">Publisher</th>
+          <td class="td-bookInformation">{{ bookDetails.publisher || '-' }}</td>
+        </tr>
+      </table>
+
+      <div class="text-center">
+        <br />
+        <button class="cool-button" (click)="addBook(bookDetails)" routerLink="/home">Add Book</button>
+      </div>
+      
+    </div>
+  </div>
+  

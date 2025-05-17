@@ -626,6 +626,7 @@ th, td {
     cursor: pointer;
     transition: transform 0.3s;
     counter-increment: carousel-cell;
+    flex-shrink: 0
   }
 
   /* cell number */

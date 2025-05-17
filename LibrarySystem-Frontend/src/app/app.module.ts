@@ -20,18 +20,17 @@ import { ListPageComponent } from './components/list-page/list-page.component';
 @NgModule({
   declarations: [
     AppComponent,
-    StartPageComponent,
-    BookListComponent,
-    BookDetailsComponent,
-    SearchBookAdvancedComponent,
-    
+    StartPageComponent,  
   ],
   imports: [
     SignInComponent,
     RegisterUserComponent,
     HomeComponent,
     SearchBookComponent,
+    SearchBookAdvancedComponent,
     ListPageComponent,
+    BookListComponent,
+    BookDetailsComponent,
     BrowserModule,
     RouterModule,
     AppRoutingModule,

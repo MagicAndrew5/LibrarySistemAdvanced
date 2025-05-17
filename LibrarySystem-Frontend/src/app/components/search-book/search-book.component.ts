@@ -38,17 +38,15 @@ export class SearchBookComponent {
       const { isbn, title, author, ebooksOnly } = this.searchForm.value;
 
       const bookPayload: any = {
-        isbn: isbn?.trim(),
-        title: title?.trim(),
-        author: author?.trim()
+        isbn: isbn?.trim() || null,
+        title: title?.trim() || null,
+        author: author?.trim() || null,
       };
 
-      // Aggiungi solo se ebooksOnly è true
-      if (ebooksOnly) {
-        bookPayload.ebooksOnly = true;
-      }
+  
+      const params = new HttpParams().set('ebooksOnly', ebooksOnly.toString());
     
-      this.http.post<any>('/api/searchBook/check/', bookPayload ).subscribe({
+      this.http.post<any>('/api/searchBook/check/', bookPayload, {params}).subscribe({
         next: (response) => {
           this.results = response.foundBooks;
 
