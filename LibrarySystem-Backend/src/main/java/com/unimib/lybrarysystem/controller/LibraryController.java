@@ -2,8 +2,10 @@ package com.unimib.lybrarysystem.controller;
 
 import com.unimib.lybrarysystem.DTO.AccountDTO;
 import com.unimib.lybrarysystem.DTO.BookDTO;
+import com.unimib.lybrarysystem.DTO.GenreDTO;
 import com.unimib.lybrarysystem.DTO.UserDTO;
 import com.unimib.lybrarysystem.mapper.BookMapper;
+import com.unimib.lybrarysystem.mapper.GenreMapper;
 import com.unimib.lybrarysystem.model.*;
 import com.unimib.lybrarysystem.service.LibraryService;
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 public class LibraryController {
@@ -67,17 +70,12 @@ public class LibraryController {
     public ResponseEntity<Map<String, Object>> showHomePage(HttpSession session) {
 
         User actualUser = (User) session.getAttribute("actualUser");
-
+        System.out.println("User info: " + actualUser + " " + actualUser.getLibraryMember());
         if (actualUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "User not authenticated"));
         }
 
         List<Book> borrowedBooks = service.findBookByLibraryMember(actualUser.getLibraryMember());
-
-        for (Book book : borrowedBooks) {
-             System.out.println("Book info: " + book.toString());
-        }
-
         List<Book> historianBooks = service.findHistoricalBookByLibraryMember(actualUser.getLibraryMember());
         List<Book> listAllBooks = service.findAllBooks();
 
@@ -85,22 +83,10 @@ public class LibraryController {
         List<BookDTO> historianBookDTOs = historianBooks.stream().map(bookMapper::toDTO).toList();
         List<BookDTO> listAllBookDTOs = listAllBooks.stream().map(bookMapper::toDTO).toList();
 
-        for (BookDTO borrowedBookDTO : borrowedBookDTOs) {
-            System.out.println("Book info: " + borrowedBookDTO);
-        }
-
-        for (BookDTO historianBookDTO : historianBookDTOs) {
-            System.out.println("Book info: " + historianBookDTO);
-        }
-
-        for (BookDTO listAllBookDTO : listAllBookDTOs) {
-            System.out.println("Book info: " + listAllBookDTO);
-        }
-
-
-
         Map<String, Object> response = new HashMap<>();
+
         response.put("user", new UserDTO(actualUser));
+
         response.put("borrowedBooks", borrowedBookDTOs);
         response.put("historianBooks", historianBookDTOs);
         response.put("listAllBooks", listAllBookDTOs);
@@ -111,14 +97,11 @@ public class LibraryController {
 
     /**
      * Handles the GET request for the book search page.
-     * @param model The model to add attributes to.
      * @return The name of the book search page view.
      */
-    @GetMapping("/searchBook")
-    public String showSearchBook(Model model) {
-        model.addAttribute("books", new Book());
-        model.addAttribute("author", new Author());
-        return "SearchBook";
+    @GetMapping("/api/searchBook/")
+    public ResponseEntity<String> showSearchBook() {
+        return ResponseEntity.ok("{\"message\": \"Welcome to the search books page\"}");
     }
 
     /**
@@ -164,94 +147,6 @@ public class LibraryController {
     }
 
     // ------------------- POST METHODS -------------------
-
-    /**
-     * Handles the POST request for searching books.
-     * @param book The book to search for.
-     * @param model The model to add attributes to.
-     * @return The name of the book list page view.
-     */
-    @PostMapping("/searchBooks")
-    public String showListBook(@RequestParam(required = false) boolean ebooksOnly, Book book, Model model, RedirectAttributes ra) {
-
-        List<Genre> foundGenre = new ArrayList<>();
-
-        if(ebooksOnly) {
-            List<Book> foundBooks = service.findEBookByAttributes(book);
-            System.out.println(foundBooks);
-
-            for(int i = 0; i < foundBooks.size(); i++) {
-                Genre genre = foundBooks.get(i).getGenreList();
-                model.addAttribute("genres", genre);
-            }
-
-            model.addAttribute("foundBooks", foundBooks);
-            //model.addAttribute("books", new Book());
-
-            if(foundBooks.isEmpty()) {
-                ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
-                return "redirect:/searchBook";
-            }
-            else {
-                return "listBookPage";
-            }
-        }
-        else {
-            List<Book> foundBooks = service.findBookByAttributes(book);
-
-
-            for(int i = 0; i < foundBooks.size(); i++) {
-                Genre genre = foundBooks.get(i).getGenreList();
-                model.addAttribute("genres", genre);
-            }
-
-            model.addAttribute("foundBooks", foundBooks);
-            model.addAttribute("books", new Book());
-
-            if(foundBooks.isEmpty()) {
-                ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
-                return "redirect:/searchBook";
-            }
-            else {
-                return "listBookPage";
-            }
-        }
-    }
-
-    /**
-     * Handles the POST request for the advanced book search.
-     * Retrieves books from the repository that match the provided publisher and author nationality and adds them to the model.
-     *
-     * @param publisher The publisher of the books to be retrieved.
-     * @param nationality The nationality of the author of the books to be retrieved.
-     * @param model The model to add attributes to.
-     * @return The name of the book list page view.
-     */
-    @PostMapping("/searchAdvancedBooks")
-    public String showListAdvancedBook(@RequestParam String publisher, @RequestParam String nationality, Model model, RedirectAttributes ra) {
-        // Search books with these parameters
-        List<Book> foundBooks = service.findBooksByPublisherAndAuthorNationality(publisher, nationality);
-        System.out.println("foundBooks Controller Info: " + foundBooks);
-        List<Genre> foundGenre = new ArrayList<>();
-
-        for(int i = 0; i < foundBooks.size(); i++) {
-            Genre genre = foundBooks.get(i).getGenreList();
-            foundGenre.add(genre);
-            model.addAttribute("genres", genre);
-        }
-
-        //model.addAttribute("genres", foundGenre);
-        model.addAttribute("foundBooks", foundBooks);
-        model.addAttribute("book", new Book());
-
-        if(foundBooks.isEmpty()) {
-            ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
-            return "redirect:/searchBookFull";
-        }
-        else {
-            return "listBookPage";
-        }
-    }
 
     /**
      * Handles the POST request for checking user account.
@@ -313,26 +208,159 @@ public class LibraryController {
     }
 
     /**
+     * Handles the POST request for searching books.
+     * @return The name of the book list page view.
+     */
+    @PostMapping("/api/searchBook/check/")
+    public ResponseEntity<?> searchBooks(
+            @RequestParam(required = false, defaultValue = "false") boolean ebooksOnly,
+            @RequestBody BookDTO bookDTO) {
+
+        List<Book> foundBooks = new ArrayList<>();
+
+        if(ebooksOnly) {
+            System.out.println("Ebooks only: " + bookDTO);
+            foundBooks = service.findEBookByAttributes(bookDTO);
+        } else {
+            System.out.println("All books: " + bookDTO);
+            foundBooks = service.findBookByAttributes(bookDTO);
+        }
+
+        if (foundBooks.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", "Your search result generated no matches, please try again"));
+        }
+
+        // 🔄 Usa il mapper per convertire
+        List<BookDTO> foundBookDTOs = bookMapper.toDTOList(foundBooks);
+        List<String> genres = foundBooks.stream()
+                .map(b -> b.getGenreList().getName())  // supponendo sia un Genre, cambia se diverso
+                .distinct()
+                .toList();
+
+        // Costruisci la risposta
+        Map<String, Object> response = Map.of(
+                "foundBooks", foundBookDTOs,
+                "genres", genres
+        );
+
+        return ResponseEntity.ok(response);
+    }
+
+
+    /*
+    @PostMapping("/searchBooks")
+    public String showListBook(@RequestParam(required = false) boolean ebooksOnly, Book book, Model model, RedirectAttributes ra) {
+
+        List<Genre> foundGenre = new ArrayList<>();
+
+        if(ebooksOnly) {
+            List<Book> foundBooks = service.findEBookByAttributes(book);
+            System.out.println(foundBooks);
+
+            for(int i = 0; i < foundBooks.size(); i++) {
+                Genre genre = foundBooks.get(i).getGenreList();
+                model.addAttribute("genres", genre);
+            }
+
+            model.addAttribute("foundBooks", foundBooks);
+            //model.addAttribute("books", new Book());
+
+            if(foundBooks.isEmpty()) {
+                ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
+                return "redirect:/searchBook";
+            }
+            else {
+                return "listBookPage";
+            }
+        }
+        else {
+            List<Book> foundBooks = service.findBookByAttributes(book);
+
+
+            for(int i = 0; i < foundBooks.size(); i++) {
+                Genre genre = foundBooks.get(i).getGenreList();
+                model.addAttribute("genres", genre);
+            }
+
+            model.addAttribute("foundBooks", foundBooks);
+            model.addAttribute("books", new Book());
+
+            if(foundBooks.isEmpty()) {
+                ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
+                return "redirect:/searchBook";
+            }
+            else {
+                return "listBookPage";
+            }
+        }
+    }
+    */
+
+    /**
+     * Handles the POST request for the advanced book search.
+     * Retrieves books from the repository that match the provided publisher and author nationality and adds them to the model.
+     *
+     * @param publisher The publisher of the books to be retrieved.
+     * @param nationality The nationality of the author of the books to be retrieved.
+     * @param model The model to add attributes to.
+     * @return The name of the book list page view.
+     */
+    @PostMapping("/searchAdvancedBooks")
+    public String showListAdvancedBook(@RequestParam String publisher, @RequestParam String nationality, Model model, RedirectAttributes ra) {
+        // Search books with these parameters
+        List<Book> foundBooks = service.findBooksByPublisherAndAuthorNationality(publisher, nationality);
+        System.out.println("foundBooks Controller Info: " + foundBooks);
+        List<Genre> foundGenre = new ArrayList<>();
+
+        for(int i = 0; i < foundBooks.size(); i++) {
+            Genre genre = foundBooks.get(i).getGenreList();
+            foundGenre.add(genre);
+            model.addAttribute("genres", genre);
+        }
+
+        //model.addAttribute("genres", foundGenre);
+        model.addAttribute("foundBooks", foundBooks);
+        model.addAttribute("book", new Book());
+
+        if(foundBooks.isEmpty()) {
+            ra.addFlashAttribute("message", "Your search result generated no matches, please try again");
+            return "redirect:/searchBookFull";
+        }
+        else {
+            return "listBookPage";
+        }
+    }
+
+
+
+    /**
      * Handles the POST request for adding a book to a library member.
-     * @param book The book to add.
      * @param model The model to add attributes to.
      * @param session The current HTTP session.
      * @return The name of the redirect view.
      */
-    @PostMapping("/addBook/{isbn}")
-    public String addBook(Model model, @PathVariable("isbn") Integer isbn, HttpSession session, Book book) {
+    @PostMapping("/api/addBook/{isbn}/")
+    public ResponseEntity<String> addBook(Model model, @PathVariable("isbn") Integer isbn, HttpSession session) {
 
         LibraryMember libraryMember = (LibraryMember) session.getAttribute("actualLibraryMember");
 
+        if (libraryMember == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in.");
+        }
+
         Book actualBook = service.findBookByISBN(isbn);
+        if (actualBook == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found.");
+        }
 
         session.setAttribute("actualBook", actualBook);
         service.addLinkBookToLibraryMember(actualBook, libraryMember);
 
-        model.addAttribute("book", book);
-        model.addAttribute("libraryMember", libraryMember);
+        //model.addAttribute("book", book);
+        //model.addAttribute("libraryMember", libraryMember);
 
-        return "redirect:/HomePage";
+        return ResponseEntity.ok("Book added to user's list");
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.unimib.lybrarysystem.service;
 
+import com.unimib.lybrarysystem.DTO.BookDTO;
 import com.unimib.lybrarysystem.model.Book;
 import com.unimib.lybrarysystem.model.LibraryMember;
 import com.unimib.lybrarysystem.model.User;
@@ -181,8 +182,8 @@ public class LibraryService {
      * @param book The book object containing the ISBN, author, and title to be matched.
      * @return A list of books that match the provided attributes.
      */
-    public List<Book> findBookByAttributes(Book book) {
-        return bookRepo.findBookByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
+    public List<Book> findBookByAttributes(BookDTO book) {
+        return bookRepo.findBookByAttributes(book.getIsbn(), book.getAuthor(), book.getTitle());
     }
 
     /**
@@ -190,8 +191,8 @@ public class LibraryService {
      *
      * @return A list of all ebooks in the repository.
      */
-    public List<Book> findEBookByAttributes(Book book) {
-        return bookRepo.findEBookByAttributes(book.getISBN(), book.getAuthor(), book.getTitle());
+    public List<Book> findEBookByAttributes(BookDTO book) {
+        return bookRepo.findEBookByAttributes(book.getIsbn(), book.getAuthor(), book.getTitle());
     }
 
     /**

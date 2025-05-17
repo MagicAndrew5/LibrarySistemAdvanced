@@ -14,6 +14,7 @@ import { HomeComponent } from './components/home-page/home-page.component';
 
 import { RouterModule } from '@angular/router';
 import { SearchBookAdvancedComponent } from './components/search-book-advanced/search-book-advanced.component';
+import { ListPageComponent } from './components/list-page/list-page.component';
 
 
 @NgModule({
@@ -23,12 +24,14 @@ import { SearchBookAdvancedComponent } from './components/search-book-advanced/s
     BookListComponent,
     BookDetailsComponent,
     SearchBookAdvancedComponent,
+    
   ],
   imports: [
     SignInComponent,
     RegisterUserComponent,
     HomeComponent,
     SearchBookComponent,
+    ListPageComponent,
     BrowserModule,
     RouterModule,
     AppRoutingModule,

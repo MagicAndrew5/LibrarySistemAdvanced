@@ -8,6 +8,7 @@ import { BookListComponent } from './components/book-list/book-list.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 import { SearchBookComponent } from './components/search-book/search-book.component';
 import { SearchBookAdvancedComponent } from './components/search-book-advanced/search-book-advanced.component';
+import { ListPageComponent } from './components/list-page/list-page.component';
 
 const routes: Routes = [
   { path: '', component: StartPageComponent },
@@ -16,8 +17,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'searchBook', component: SearchBookComponent }, // Search page
   { path: 'searchBookFull', component: SearchBookAdvancedComponent }, // Advanced search page
-  { path: 'detailBooksBorrowed/:title', component: BookListComponent }, // Detail page for borrowed books
-  { path: 'detailBooks/:title', component: BookDetailsComponent }, // Detail page for available books
+  { path: 'detailBooksBorrowed/:isbn', component: BookListComponent }, // Detail page for borrowed books
+  { path: 'detailBooks/:isbn', component: BookDetailsComponent }, // Detail page for available books
+  { path: 'list-book', component: ListPageComponent }, // List of books
 ];
 
 @NgModule({

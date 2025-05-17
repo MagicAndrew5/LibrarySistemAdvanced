@@ -542,15 +542,104 @@ th, td {
 }
 
 /* ! Carousel */
-.main-carousel{
-    padding: 40px 0;
-}
+.main-carousel {
+    padding: 40px 100px;      /* Più spazio sopra e sotto, un po' ai lati */
+    margin: 0 auto;          /* Centra il carosello */
+    max-width: 1200px;       /* Evita che si allarghi troppo */
+    box-sizing: border-box;  /* Assicura che il padding non allarghi l'elemento oltre il max-width */
+  }
+  
 
-.carousel-cell{
-    height: 300px;
-    width: 250px;
-    background-color: #0067ab;
-    line-height: 270px;
+/* Layout */
+.home-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 20px;
+  }
+  
+  .welcome-section {
+    background-color: #f9f9f9;
+    border-radius: 16px;
+    padding: 30px;
     text-align: center;
-    margin-right: 40px;
-}
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Typography */
+  .homepage-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #0067ab;
+  }
+  
+  .welcome-text {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  /* Buttons */
+  .actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .btn-home {
+    background-color: #0067ab;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-home:hover {
+    background-color: #004f85;
+  }
+  
+  /* Carousel section */
+  .section-title {
+    font-size: 1.5rem;
+    margin: 50px 0 20px 20px;
+    color: #333;
+  }
+  
+  /* Carousel cells */
+  .carousel-cell {
+    height: 250px;
+    width: 200px;
+    background-color: #0067ab;
+    color: white;
+    line-height: 1.4;
+    text-align: center;
+    margin-right: 25px;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+    counter-increment: carousel-cell;
+  }
+
+  /* cell number */
+  
+  .carousel-cell:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Book title inside cell */
+  .book-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
+  
+  
