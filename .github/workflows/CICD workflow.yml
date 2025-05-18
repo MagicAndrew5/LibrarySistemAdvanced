@@ -48,7 +48,13 @@ jobs:
         SPRING_DATASOURCE_PASSWORD: ${{ secrets.MYSQL_DB_PASSWORD }}
       run: |
         ./mvnw clean install
-
+        
+        # Se i test falliscono, mostra i report
+        if [ $? -ne 0 ]; then
+        echo "=== TEST FAILURE REPORTS ==="
+        find target/surefire-reports -name "*.txt" -exec cat {} \;
+        exit 1
+        fi
     #### Frontend Build ####
     - name: Install Frontend Dependencies
       working-directory: frontend
