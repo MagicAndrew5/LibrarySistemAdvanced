@@ -15,7 +15,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_DATABASE: library
+          MYSQL_DATABASE: librarymanagement
           MYSQL_ROOT_PASSWORD: rootpassword
         ports: ['3306:3306']
         options: >-
@@ -43,9 +43,9 @@ jobs:
     - name: Build and Test Backend
       working-directory: LibrarySystem-Backend
       env:
-        SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/library?useSSL=false&allowPublicKeyRetrieval=true
-        SPRING_DATASOURCE_USERNAME: root
-        SPRING_DATASOURCE_PASSWORD: 59CVZbNKy3fB41B8&o$C8P
+        SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/${{ secrets.MYSQL_DB_NAME }}?useSSL=false&allowPublicKeyRetrieval=true
+        SPRING_DATASOURCE_USERNAME: ${{ secrets.MYSQL_DB_USERNAME }}
+        SPRING_DATASOURCE_PASSWORD: ${{ secrets.MYSQL_DB_PASSWORD }}
       run: |
         ./mvnw clean install
 
