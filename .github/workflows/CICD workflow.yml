@@ -43,11 +43,11 @@ jobs:
 
     #### Backend Build ####
     - name: Build and Test Backend
-      working-directory: backend
+      working-directory: LibrarySystem-Backend
       env:
-        SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/mydb
-        SPRING_DATASOURCE_USERNAME: user
-        SPRING_DATASOURCE_PASSWORD: password
+        SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/library?useSSL=false&serverTimezone=UTC
+        SPRING_DATASOURCE_USERNAME: root
+        SPRING_DATASOURCE_PASSWORD: 59CVZbNKy3fB41B8&o$C8P
       run: |
         ./mvnw clean install
 
