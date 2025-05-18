@@ -15,8 +15,8 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_DATABASE: librarymanagement
-          MYSQL_ROOT_PASSWORD: rootpassword
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DB_NAME }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_DB_PASSWORD }}
         ports: ['3306:3306']
         options: >-
           --health-cmd="mysqladmin ping -h 127.0.0.1 -u root -prootpassword"
