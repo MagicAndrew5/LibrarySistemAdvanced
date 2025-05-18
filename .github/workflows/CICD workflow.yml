@@ -45,7 +45,7 @@ jobs:
     - name: Build and Test Backend
       working-directory: LibrarySystem-Backend
       env:
-        SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/library?useSSL=false&serverTimezone=UTC
+        SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/library?useSSL=false&allowPublicKeyRetrieval=true
         SPRING_DATASOURCE_USERNAME: root
         SPRING_DATASOURCE_PASSWORD: 59CVZbNKy3fB41B8&o$C8P
       run: |
