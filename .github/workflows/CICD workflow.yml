@@ -7,10 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  build:
-
+  backend:
     runs-on: ubuntu-latest
-
     services:
       mysql:
         image: mysql:8.0
@@ -19,7 +17,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_DB_PASSWORD }}
         ports: ['3306:3306']
         options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -u root -prootpassword"
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -u root -p${{ secrets.MYSQL_DB_PASSWORD }}"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -34,12 +32,6 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-
-    #### Backend Build ####
     - name: Build and Test Backend
       working-directory: LibrarySystem-Backend
       env:
@@ -50,13 +42,36 @@ jobs:
       run: |
         ./mvnw clean install
 
-        # If test fails, print the test report
         if [ $? -ne 0 ]; then
-        echo "=== TEST FAILURE REPORTS ==="
-        find target/surefire-reports -name "*.txt" -exec cat {} \;
-        exit 1
+          echo "=== TEST FAILURE REPORTS ==="
+          find target/surefire-reports -name "*.txt" -exec cat {} \;
+          exit 1
         fi
-    #### Frontend Build ####
+
+    - name: Run Checkstyle
+      working-directory: LibrarySystem-Backend
+      run: ./mvnw checkstyle:checkstyle
+
+    - name: Run Spotbugs
+      working-directory: LibrarySystem-Backend
+      run: ./mvnw spotbugs:check
+
+    - name: Generate Coverage Report
+      working-directory: LibrarySystem-Backend
+      run: ./mvnw jacoco:report
+
+  frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
     - name: Install Frontend Dependencies
       working-directory: LibrarySystem-Frontend
       run: npm ci
@@ -69,33 +84,10 @@ jobs:
       working-directory: LibrarySystem-Frontend
       run: npm run build
 
-    # Stage Verify
-    - name: Run Checkstyle
-      working-directory: LibrarySystem-Backend
-      run: ./mvnw checkstyle:checkstyle
-
-    - name: Run Spotbugs
-      working-directory: LibrarySystem-Backend
-      run: ./mvnw spotbugs:check
-
     - name: Run ESLint
       working-directory: LibrarySystem-Frontend
       run: npm run lint
 
-    # Stage Test
-    - name: Generate Coverage Report
-      working-directory: LibrarySystem-Backend
-      run: ./mvnw jacoco:report
     - name: Generate Frontend Coverage
       working-directory: LibrarySystem-Frontend
       run: npm run test -- --code-coverage
-   
-
-
-    
-    
-      #### Deploy Stage (Optional) ####
-    # Example: Save artifacts or deploy to cloud/server
-    # - name: Deploy to Heroku / AWS / DockerHub
-    #   run: |
-    #     echo "Deploy steps here"
