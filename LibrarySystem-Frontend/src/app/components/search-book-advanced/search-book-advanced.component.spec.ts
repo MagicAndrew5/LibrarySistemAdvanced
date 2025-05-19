@@ -8,7 +8,7 @@ describe('SearchBookAdvancedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SearchBookAdvancedComponent]
+      imports: [SearchBookAdvancedComponent]
     })
     .compileComponents();
 
