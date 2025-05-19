@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchBookAdvancedComponent } from './search-book-advanced.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('SearchBookAdvancedComponent', () => {
   let component: SearchBookAdvancedComponent;
@@ -8,7 +9,7 @@ describe('SearchBookAdvancedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchBookAdvancedComponent]
+      imports: [SearchBookAdvancedComponent, HttpClientTestingModule]
     })
     .compileComponents();
 
