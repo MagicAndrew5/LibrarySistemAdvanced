@@ -32,7 +32,6 @@ testem.log
 # 📦 Dipendenze e gestori pacchetti
 # -----------------------------------------------------
 /node_modules/
-package-lock.json
 # yarn.lock (decommenta se usi yarn)
 # yarn.lock
 
