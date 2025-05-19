@@ -69,6 +69,15 @@ jobs:
       working-directory: LibrarySystem-Frontend
       run: npm run build
 
+    # Stage Verify
+    - name: Run Checkstyle
+      working-directory: LibrarySystem-Backend
+      run: ./mvnw checkstyle:checkstyle
+
+    - name: Run Spotbugs
+      working-directory: LibrarySystem-Backend
+      run: ./mvnw spotbugs:check
+
     #### Deploy Stage (Optional) ####
     # Example: Save artifacts or deploy to cloud/server
     # - name: Deploy to Heroku / AWS / DockerHub
