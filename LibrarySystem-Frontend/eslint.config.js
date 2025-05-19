@@ -1,6 +1,6 @@
-import js from "@eslint/js";
+import { defineConfig } from "eslint/config";
 
-export default [
+export default defineConfig[
   {
     ...js.configs.recommended,
     files: ["**/*.js", "**/*.ts", "**/*.jsx", "**/*.tsx"],
@@ -9,4 +9,14 @@ export default [
       sourceType: "module",
     },
   },
+  {
+		rules: {
+			semi: "error",
+			"prefer-const": "error",
+		},
+	},
 ];
+
+
+
+	
