@@ -7,7 +7,6 @@ import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angula
 
 @Component({
   selector: 'app-list-page',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './list-page.component.html',
   styleUrl: './list-page.component.css'

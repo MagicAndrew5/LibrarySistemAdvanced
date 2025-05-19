@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-search-book',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './search-book.component.html',
   styleUrls: ['./search-book.component.css']
