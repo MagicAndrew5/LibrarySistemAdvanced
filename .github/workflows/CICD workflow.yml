@@ -90,4 +90,4 @@ jobs:
 
     - name: Generate Frontend Coverage
       working-directory: LibrarySystem-Frontend
-      run: npm run test -- --code-coverage
+      run: npm run test -- --browsers=ChromeHeadless --code-coverage
