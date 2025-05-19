@@ -78,7 +78,23 @@ jobs:
       working-directory: LibrarySystem-Backend
       run: ./mvnw spotbugs:check
 
-    #### Deploy Stage (Optional) ####
+    - name: Run ESLint
+     working-directory: LibrarySystem-Frontend
+     run: npm run lint
+
+    # Stage Test
+    - name: Generate Coverage Report
+     working-directory: LibrarySystem-Backend
+     run: ./mvnw jacoco:report
+    - name: Generate Frontend Coverage
+     working-directory: LibrarySystem-Frontend
+     run: npm run test -- --code-coverage
+   
+
+
+    
+    
+      #### Deploy Stage (Optional) ####
     # Example: Save artifacts or deploy to cloud/server
     # - name: Deploy to Heroku / AWS / DockerHub
     #   run: |
