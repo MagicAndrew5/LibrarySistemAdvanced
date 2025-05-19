@@ -79,16 +79,16 @@ jobs:
       run: ./mvnw spotbugs:check
 
     - name: Run ESLint
-     working-directory: LibrarySystem-Frontend
-     run: npm run lint
+      working-directory: LibrarySystem-Frontend
+      run: npm run lint
 
     # Stage Test
     - name: Generate Coverage Report
-     working-directory: LibrarySystem-Backend
-     run: ./mvnw jacoco:report
+      working-directory: LibrarySystem-Backend
+      run: ./mvnw jacoco:report
     - name: Generate Frontend Coverage
-     working-directory: LibrarySystem-Frontend
-     run: npm run test -- --code-coverage
+      working-directory: LibrarySystem-Frontend
+      run: npm run test -- --code-coverage
    
 
 
