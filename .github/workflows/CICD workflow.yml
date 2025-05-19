@@ -13,15 +13,9 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_DATABASE: library
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DB_NAME }}
           MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_DB_PASSWORD }}
         ports: ['3306:3306']
-        options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -u root -prootpassword"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -32,6 +26,17 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Wait for MySQL to be ready
+      run: |
+        echo "Waiting for MySQL..."
+        for i in {1..30}; do
+          if mysqladmin ping -h 127.0.0.1 -u ${{ secrets.MYSQL_DB_USERNAME }} -p${{ secrets.MYSQL_DB_PASSWORD }} --silent; then
+            echo "MySQL is ready!"
+            break
+          fi
+          echo "Still waiting..."
+          sleep 2
+        done
     - name: Build and Test Backend
       working-directory: LibrarySystem-Backend
       env:
