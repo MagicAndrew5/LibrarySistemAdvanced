@@ -224,11 +224,17 @@ public class Author {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Author author)) return false;
-        return Objects.equals(id, author.id) && Objects.equals(name, author.name) && Objects.equals(surname, author.surname) &&
-                Objects.equals(birthDate, author.birthDate) && Objects.equals(nationality, author.nationality) &&
-                Objects.equals(books, author.books) && Objects.equals(collaborators, author.collaborators);
+        if (!(o instanceof Author)) return false;
+        Author author = (Author) o;
+        return Objects.equals(id, author.id) &&
+                Objects.equals(name, author.name) &&
+                Objects.equals(surname, author.surname) &&
+                Objects.equals(birthDate, author.birthDate) &&
+                Objects.equals(nationality, author.nationality) &&
+                Objects.equals(books, author.books) &&
+                Objects.equals(collaborators, author.collaborators);
     }
+
 
     /**
      * Returns a hash code value for the object.
