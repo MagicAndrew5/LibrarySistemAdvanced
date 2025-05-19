@@ -50,7 +50,7 @@ jobs:
       run: |
         ./mvnw clean install
 
-        # Se i test falliscono, mostra i report
+        # If test fails, print the test report
         if [ $? -ne 0 ]; then
         echo "=== TEST FAILURE REPORTS ==="
         find target/surefire-reports -name "*.txt" -exec cat {} \;
@@ -58,7 +58,7 @@ jobs:
         fi
     #### Frontend Build ####
     - name: Install Frontend Dependencies
-      working-directory: frontend
+      working-directory: LibrarySystem-Frontend
       run: npm ci
 
     - name: Run Frontend Tests
