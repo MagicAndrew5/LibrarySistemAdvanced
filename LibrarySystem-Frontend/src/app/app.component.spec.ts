@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'library-frontend'`, () => {
+  it(`should have as title 'LibraryFrontend'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('library-frontend');
+    expect(app.title).toEqual('LibraryFrontend');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('library-frontend');
+    expect(compiled.querySelector('h1')?.textContent).toContain('LibraryFrontend');
   });
 });
