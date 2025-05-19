@@ -5,6 +5,7 @@ export default defineConfig([
   {
     ...js.configs.recommended,
     files: ["**/*.{js,ts,jsx,tsx}"], // più compatto
+    ignores: ["dist/**"], // ⛔️ IGNORA LA CARTELLA DIST
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
