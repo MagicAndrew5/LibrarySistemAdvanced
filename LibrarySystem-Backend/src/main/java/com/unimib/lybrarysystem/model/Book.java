@@ -258,7 +258,8 @@ public class Book {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Book book)) return false;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
         return Objects.equals(ISBN, book.ISBN) && Objects.equals(title, book.title) && Objects.equals(author, book.author) &&
                 Objects.equals(publisher, book.publisher) && Objects.equals(authors, book.authors) &&
                 Objects.equals(genreList, book.genreList) && Objects.equals(borrowingMembers, book.borrowingMembers) &&

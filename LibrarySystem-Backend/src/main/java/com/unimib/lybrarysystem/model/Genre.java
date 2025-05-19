@@ -99,7 +99,8 @@ public class Genre {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Genre genre)) return false;
+        if (!(o instanceof Genre)) return false;
+        Genre genre = (Genre) o;
         return Objects.equals(id, genre.id) && Objects.equals(name, genre.name);
     }
 

@@ -201,7 +201,8 @@ public class LibraryMember {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof LibraryMember that)) return false;
+        if (!(o instanceof LibraryMember)) return false;
+        LibraryMember that = (LibraryMember) o;
         return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname) &&
                 Objects.equals(membershipDate, that.membershipDate) && Objects.equals(borrowedBooks, that.borrowedBooks) &&
                 Objects.equals(historianBooks, that.historianBooks);
