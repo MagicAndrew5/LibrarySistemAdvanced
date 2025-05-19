@@ -1,17 +1,16 @@
 <div class="backgroundHomePage">
-    <div class="container home-container">
-      <div class="welcome-section">
-        <h1 class="homepage-title">Welcome, {{ user?.username }}!</h1>
-        <p class="welcome-text">
-          Your library member ID is <strong>{{ user?.libraryMemberId }}</strong>.<br>
-          Below, you can find all your borrowed books.
-        </p>
-      </div>
+  <div class="container home-container">
+    <div class="welcome-section">
+      <h1 class="homepage-title">Welcome, {{ user?.username }}!</h1>
+      <p class="welcome-text">
+        Your library member ID is <strong>{{ user?.libraryMemberId }}</strong>.<br>
+        Below, you can find all your borrowed books.
+      </p>
+    </div>
   
-      <div class="actions">
-        <a class="btn-home" routerLink="/searchBook">🔍 Search for Books</a>
-        <a class="btn-home" routerLink="/searchBookFull">📚 Advanced Book Search</a>
-      </div>
+    <div class="actions">
+      <a class="btn-home" routerLink="/searchBook">🔍 Search for Books</a>
+      <a class="btn-home" routerLink="/searchBookFull">📚 Advanced Book Search</a>
     </div>
   </div>
   
@@ -35,5 +34,6 @@
       <div class="book-title">{{ book?.title }}</div>
     </div>
   </div>
+</div>
   
 

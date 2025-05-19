@@ -10,7 +10,7 @@ import { SearchBookComponent } from './components/search-book/search-book.compon
 import { SearchBookAdvancedComponent } from './components/search-book-advanced/search-book-advanced.component';
 import { ListPageComponent } from './components/list-page/list-page.component';
 
-const routes: Routes = [
+const routes : Routes = [
   { path: '', component: StartPageComponent },
   { path: 'login', component: SignInComponent },
   { path: 'register', component: RegisterUserComponent },

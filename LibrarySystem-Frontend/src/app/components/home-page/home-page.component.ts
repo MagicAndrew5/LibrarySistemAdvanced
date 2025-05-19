@@ -14,7 +14,7 @@ import Flickity from 'flickity';
 })
 export class HomeComponent implements OnInit {
 
-  user: any = {}
+  user: any = {};
   borrowedBooks: any[] = [];
   historianBooks: any[] = [];
   listAllBooks: any[] = [];
