@@ -62,11 +62,11 @@ jobs:
       run: npm ci
 
     - name: Run Frontend Tests
-      working-directory: frontend
+      working-directory: LibrarySystem-Frontend
       run: npm run test -- --watch=false --browsers=ChromeHeadless
 
     - name: Build Frontend
-      working-directory: frontend
+      working-directory: LibrarySystem-Frontend
       run: npm run build
 
     #### Deploy Stage (Optional) ####
