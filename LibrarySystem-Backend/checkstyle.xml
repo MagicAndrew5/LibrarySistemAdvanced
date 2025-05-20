@@ -9,6 +9,7 @@
         <module name="TypeName"/>
         <module name="MethodName"/>
         <module name="LocalVariableName"/>
+
         <!-- mute the method below due to a warning suggesting to rename the key 'ISBN' to 'isbn' -->
         
         <!--  

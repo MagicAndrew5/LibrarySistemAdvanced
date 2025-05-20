@@ -29,8 +29,7 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
     /**
      * Finds ebooks by optional attributes.
      */
-    @Query("SELECT b FROM Book b" +
-           "WHERE TYPE(b) = EBook" +
+    @Query("SELECT b FROM Book b WHERE TYPE(b) = EBook " +
              "AND (:isbn IS NULL OR b.ISBN = :isbn)" +
              "AND (:author IS NULL OR b.author = :author) " +
              "AND (:title IS NULL OR b.title = :title)")
@@ -65,8 +64,7 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
     /**
      * Finds books by publisher and author's nationality.
      */
-    @Query("SELECT b FROM Book b" +
-           "JOIN b.authors a" +
-           "WHERE b.publisher = :publisher AND a.nationality = :nationality")
+    @Query(" SELECT b FROM Book b JOIN b.authors a " +
+           " WHERE b.publisher = :publisher AND a.nationality = :nationality ")
     List<Book> findBooksByPublisherAndAuthorNationality(String publisher, String nationality);
 }
