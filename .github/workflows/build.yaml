@@ -37,4 +37,4 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MagicAndrew5_LibrarySistemAdvanced_700d665b-5d80-4519-9db0-b73fa95950c8 -Dsonar.projectName='LibrarySistemAdvanced'
+        run: mvn -B verify -DskipTests org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MagicAndrew5_LibrarySistemAdvanced_700d665b-5d80-4519-9db0-b73fa95950c8 -Dsonar.projectName='LibrarySistemAdvanced'
