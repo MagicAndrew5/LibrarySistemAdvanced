@@ -81,16 +81,16 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-            -Dsonar.projectKey=MagicAndrew5_LibrarySistemAdvanced_3f088236-e914-4809-8bb9-bb9eda509d63 \
-            -Dsonar.projectName='LibrarySistemAdvanced'
+        run: #mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            #-Dsonar.projectKey=MagicAndrew5_LibrarySistemAdvanced_3f088236-e914-4809-8bb9-bb9eda509d63 \
+           # -Dsonar.projectName='LibrarySistemAdvanced'
           
-          #
-          #./mvnw sonar:sonar \
-          #-Dsonar.projectKey=${{ secrets.SONAR_KEY_PROJECT }} \
-          #-Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-          #-Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-          #-Dsonar.java.spotbugs.reportPaths=target/spotbugs/spotbugs.xml
+          
+          ./mvnw -B verify sonar:sonar \
+          -Dsonar.projectKey=${{ secrets.SONAR_KEY_PROJECT }} \
+          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.java.spotbugs.reportPaths=target/spotbugs/spotbugs.xml
 
           
 
