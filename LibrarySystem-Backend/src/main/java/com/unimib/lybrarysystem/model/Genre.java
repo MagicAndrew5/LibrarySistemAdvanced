@@ -1,7 +1,14 @@
 package com.unimib.lybrarysystem.model;
 
-import jakarta.persistence.*;
 import java.util.Objects;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 
 /**
  * The Genre class represents a literary genre in the library system.
@@ -98,9 +105,9 @@ public class Genre {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Genre)) return false;
-        Genre genre = (Genre) o;
+        if (this == o) { return true; }
+        if (!(o instanceof Genre)) { return false; }
+        final Genre genre = (Genre) o;
         return Objects.equals(id, genre.id) && Objects.equals(name, genre.name);
     }
 

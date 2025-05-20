@@ -1,7 +1,8 @@
 package com.unimib.lybrarysystem.repository;
 
-import com.unimib.lybrarysystem.model.Genre;
 import org.springframework.data.repository.CrudRepository;
+
+import com.unimib.lybrarysystem.model.Genre;
 
 /**
  * The repository for the genre entity.

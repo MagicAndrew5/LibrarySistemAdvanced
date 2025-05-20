@@ -1,8 +1,15 @@
 package com.unimib.lybrarysystem.model;
 
-import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-import java.util.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 /**
  * Represents a library member entity in the library system.
@@ -42,7 +49,8 @@ public class LibraryMember {
      * @param borrowedBooks  The set of books borrowed by the library member.
      * @param historianBooks The set of books historian borrowed by the library member.
      */
-    public LibraryMember(Integer id, String name, String surname, String membershipDate, List<Book> borrowedBooks, List<Book> historianBooks) {
+    public LibraryMember(Integer id, String name, String surname, 
+                String membershipDate, List<Book> borrowedBooks, List<Book> historianBooks) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -200,11 +208,13 @@ public class LibraryMember {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof LibraryMember)) return false;
-        LibraryMember that = (LibraryMember) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname) &&
-                Objects.equals(membershipDate, that.membershipDate) && Objects.equals(borrowedBooks, that.borrowedBooks) &&
+        if (this == o) { return true; }
+        if (!(o instanceof LibraryMember)) { return false; }
+        final LibraryMember that = (LibraryMember) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && 
+                Objects.equals(surname, that.surname) && 
+                Objects.equals(membershipDate, that.membershipDate) && 
+                Objects.equals(borrowedBooks, that.borrowedBooks) &&
                 Objects.equals(historianBooks, that.historianBooks);
     }
 

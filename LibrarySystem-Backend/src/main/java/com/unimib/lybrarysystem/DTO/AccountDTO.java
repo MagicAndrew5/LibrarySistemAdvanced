@@ -6,6 +6,7 @@ import com.unimib.lybrarysystem.model.User;
 public class AccountDTO {
 
     private User user;
+    
     private LibraryMember libraryMember;
 
     // Getters and setters

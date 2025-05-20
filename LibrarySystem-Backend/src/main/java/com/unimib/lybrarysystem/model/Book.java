@@ -1,11 +1,23 @@
 package com.unimib.lybrarysystem.model;
 
-import jakarta.persistence.*;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  * Represents a book entity in the library system.
@@ -70,7 +82,9 @@ public class Book {
      * @param libraryMember     The library members who borrowed the book.
      * @param historianMembers  The library members who historian borrowed the book.
      */
-    public Book(Integer ISBN, String title, String author, String publisher, Set<Author> authors, Genre genreList, List<LibraryMember> libraryMember, List<LibraryMember> historianMembers) {
+    public Book(Integer ISBN, String title, String author, String publisher, 
+                Set<Author> authors, Genre genreList, List<LibraryMember> libraryMember, 
+                List<LibraryMember> historianMembers) {
         this.ISBN = ISBN;
         this.title = title;
         this.author = author;
@@ -257,12 +271,13 @@ public class Book {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Book)) return false;
-        Book book = (Book) o;
-        return Objects.equals(ISBN, book.ISBN) && Objects.equals(title, book.title) && Objects.equals(author, book.author) &&
-                Objects.equals(publisher, book.publisher) && Objects.equals(authors, book.authors) &&
-                Objects.equals(genreList, book.genreList) && Objects.equals(borrowingMembers, book.borrowingMembers) &&
+        if (this == o) { return true; }
+        if (!(o instanceof Book)) { return false; }
+        final Book book = (Book) o;
+        return Objects.equals(ISBN, book.ISBN) && Objects.equals(title, book.title) && 
+                Objects.equals(author, book.author) && Objects.equals(publisher, book.publisher) && 
+                Objects.equals(authors, book.authors) && Objects.equals(genreList, book.genreList) && 
+                Objects.equals(borrowingMembers, book.borrowingMembers) && 
                 Objects.equals(historianMembers, book.historianMembers);
     }
 
@@ -273,6 +288,8 @@ public class Book {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(ISBN, title, author, publisher, authors, genreList, borrowingMembers, historianMembers);
+        return Objects.hash(ISBN, title, author, publisher, authors, genreList, 
+                            borrowingMembers, historianMembers);
     }
 }
+

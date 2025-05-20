@@ -1,19 +1,15 @@
 package com.unimib.lybrarysystem.DTO;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
-
 public class AuthorDTO {
 
     private Integer id;
+
     private String name;
+
     private String surname;
+
     private String birthDate;
+
     private String nationality;
 
     public Integer getId() {

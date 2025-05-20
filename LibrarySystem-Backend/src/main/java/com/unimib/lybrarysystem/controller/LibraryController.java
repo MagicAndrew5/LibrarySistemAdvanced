@@ -1,24 +1,33 @@
 package com.unimib.lybrarysystem.controller;
 
-import com.unimib.lybrarysystem.DTO.*;
-import com.unimib.lybrarysystem.mapper.BookMapper;
-import com.unimib.lybrarysystem.mapper.GenreMapper;
-import com.unimib.lybrarysystem.model.*;
-import com.unimib.lybrarysystem.service.LibraryService;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.security.Principal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import jakarta.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.unimib.lybrarysystem.DTO.AccountDTO;
+import com.unimib.lybrarysystem.DTO.AdvancedSearchDTO;
+import com.unimib.lybrarysystem.DTO.BookDTO;
+import com.unimib.lybrarysystem.DTO.UserDTO;
+import com.unimib.lybrarysystem.mapper.BookMapper;
+import com.unimib.lybrarysystem.model.Book;
+import com.unimib.lybrarysystem.model.LibraryMember;
+import com.unimib.lybrarysystem.model.User;
+import com.unimib.lybrarysystem.service.LibraryService;
+
+
 
 @RestController
 public class LibraryController {
@@ -63,24 +72,30 @@ public class LibraryController {
      * @param session The current HTTP session.
      * @return A response entity containing user and book information.
      */
+
     @GetMapping("/api/homepage/")
     public ResponseEntity<Map<String, Object>> showHomePage(HttpSession session) {
 
-        User actualUser = (User) session.getAttribute("actualUser");
+        final User actualUser = (User) session.getAttribute("actualUser");
+
         System.out.println("User info: " + actualUser + " " + actualUser.getLibraryMember());
         if (actualUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "User not authenticated"));
         }
 
-        List<Book> borrowedBooks = service.findBookByLibraryMember(actualUser.getLibraryMember());
-        List<Book> historianBooks = service.findHistoricalBookByLibraryMember(actualUser.getLibraryMember());
-        List<Book> listAllBooks = service.findAllBooks();
+        final List<Book> borrowedBooks = service.findBookByLibraryMember(actualUser.getLibraryMember());
 
-        List<BookDTO> borrowedBookDTOs = borrowedBooks.stream().map(bookMapper::toDTO).toList();
-        List<BookDTO> historianBookDTOs = historianBooks.stream().map(bookMapper::toDTO).toList();
-        List<BookDTO> listAllBookDTOs = listAllBooks.stream().map(bookMapper::toDTO).toList();
+        final List<Book> historianBooks = service.findHistoricalBookByLibraryMember(actualUser.getLibraryMember());
 
-        Map<String, Object> response = new HashMap<>();
+        final List<Book> listAllBooks = service.findAllBooks();
+
+        final List<BookDTO> borrowedBookDTOs = borrowedBooks.stream().map(bookMapper::toDTO).toList();
+
+        final List<BookDTO> historianBookDTOs = historianBooks.stream().map(bookMapper::toDTO).toList();
+
+        final List<BookDTO> listAllBookDTOs = listAllBooks.stream().map(bookMapper::toDTO).toList();
+
+        final Map<String, Object> response = new HashMap<>();
 
         response.put("user", new UserDTO(actualUser));
 
@@ -121,23 +136,23 @@ public class LibraryController {
     @GetMapping(value = "/api/detailBooks/{isbn}/")
     public ResponseEntity<BookDTO> getDetailBooks(@PathVariable("isbn") Integer isbn) {
 
-        Book bookRetrieve = service.findBookByISBN(isbn);
+        final Book bookRetrieve = service.findBookByISBN(isbn);
         if (bookRetrieve == null) {
             return ResponseEntity.notFound().build();
         }
 
-        BookDTO bookRetrieveDTO = bookMapper.toDTO(bookRetrieve);
+        final BookDTO bookRetrieveDTO = bookMapper.toDTO(bookRetrieve);
         return ResponseEntity.ok(bookRetrieveDTO);
     }
 
     @GetMapping(value = "/api/detailBooksBorrowed/{isbn}/")
     public ResponseEntity<BookDTO> getDetailBooksBorrowed(@PathVariable("isbn") Integer isbn) {
-        Book bookRetrieve = service.findBookByISBN(isbn);
+        final Book bookRetrieve = service.findBookByISBN(isbn);
         if (bookRetrieve == null) {
             return ResponseEntity.notFound().build();
         }
 
-        BookDTO bookRetrieveDTO = bookMapper.toDTO(bookRetrieve);
+        final BookDTO bookRetrieveDTO = bookMapper.toDTO(bookRetrieve);
         return ResponseEntity.ok(bookRetrieveDTO);
     }
 
@@ -152,17 +167,16 @@ public class LibraryController {
     @ResponseBody
     public ResponseEntity<?> checkAccount(
             @RequestBody User user, HttpSession session) {
-        boolean validCheck = service.checkLoginAccount(user);
+        final boolean validCheck = service.checkLoginAccount(user);
 
-        if(validCheck) {
-
-            User actualUser = service.findUser(user);
+        if (validCheck) {
+            final User actualUser = service.findUser(user);
             session.setAttribute("actualUser", actualUser);
 
-            LibraryMember actualLibraryMember = service.findLibraryMember(actualUser.getLibraryMember());
+            final LibraryMember actualLibraryMember = service.findLibraryMember(actualUser.getLibraryMember());
             session.setAttribute("actualLibraryMember", actualLibraryMember);
 
-            Map<String, Object> response = new HashMap<>();
+            final Map<String, Object> response = new HashMap<>();
             response.put("message", "Login successful");
             response.put("username", actualUser.getUsername());
 
@@ -183,16 +197,17 @@ public class LibraryController {
     public ResponseEntity<?> addNewAccount(
             @RequestBody AccountDTO accountDTO, HttpSession session) {
 
-        boolean validAccount = service.checkSaveAccount(accountDTO.getUser(), accountDTO.getLibraryMember());
+        final boolean validAccount = service.checkSaveAccount(accountDTO.getUser(), accountDTO.getLibraryMember());
 
         if (validAccount) {
-            User actualUser = service.findUser(accountDTO.getUser());
-            LibraryMember actualLibraryMember = service.findLibraryMember(accountDTO.getLibraryMember());
+            final User actualUser = service.findUser(accountDTO.getUser());
+
+            final LibraryMember actualLibraryMember = service.findLibraryMember(accountDTO.getLibraryMember());
 
             session.setAttribute("actualUser", actualUser);
             session.setAttribute("actualLibraryMember", actualLibraryMember);
 
-            Map<String, Object> response = new HashMap<>();
+            final Map<String, Object> response = new HashMap<>();
             response.put("message", "Registration successful");
             response.put("username", actualUser.getUsername());
 
@@ -212,8 +227,8 @@ public class LibraryController {
             @RequestParam(required = false, defaultValue = "false") boolean ebooksOnly,
             @RequestBody BookDTO bookDTO) {
 
-        List<Book> foundBooks;
-        if(ebooksOnly) {
+        final List<Book> foundBooks;
+        if (ebooksOnly) {
             System.out.println("Ebook");
             foundBooks = service.findEBookByAttributes(bookDTO);
         }
@@ -230,14 +245,15 @@ public class LibraryController {
         }
 
         // 🔄 Usa il mapper per convertire
-        List<BookDTO> foundBookDTOs = bookMapper.toDTOList(foundBooks);
-        List<String> genres = foundBooks.stream()
+        final List<BookDTO> foundBookDTOs = bookMapper.toDTOList(foundBooks);
+
+        final List<String> genres = foundBooks.stream()
                 .map(b -> b.getGenreList().getName())  // supponendo sia un Genre, cambia se diverso
                 .distinct()
                 .toList();
 
         // Costruisci la risposta
-        Map<String, Object> response = Map.of(
+        final Map<String, Object> response = Map.of(
                 "foundBooks", foundBookDTOs,
                 "genres", genres
         );
@@ -247,14 +263,15 @@ public class LibraryController {
 
     /**
      * Handles the POST request for the advanced book search.
-     * Retrieves books from the repository that match the provided publisher and author nationality and adds them to the model.
+     * Retrieves books from the repository that match the provided publisher and author 
+     * nationality and adds them to the model.
      * @return The name of the book list page view.
      */
     @PostMapping("/api/searchBookAdvanced/check/")
     public ResponseEntity<?> searchBooksAdvanced(
             @RequestBody AdvancedSearchDTO advancedSearchDTO) {
 
-        List<Book> foundBooks = service.findBooksByPublisherAndAuthorNationality(
+        final List<Book> foundBooks = service.findBooksByPublisherAndAuthorNationality(
                 advancedSearchDTO.getPublisher(), advancedSearchDTO.getAuthorNationality());
 
         if (foundBooks.isEmpty()) {
@@ -262,13 +279,14 @@ public class LibraryController {
                     .body(Map.of("message", "Your search result generated no matches, please try again"));
         }
 
-        List<BookDTO> bookDTOs = bookMapper.toDTOList(foundBooks);
-        List<String> genres = foundBooks.stream()
+        final List<BookDTO> bookDTOs = bookMapper.toDTOList(foundBooks);
+
+        final List<String> genres = foundBooks.stream()
                 .map(book -> book.getGenreList().getName())
                 .distinct()
                 .toList();
 
-        Map<String, Object> response = Map.of(
+        final Map<String, Object> response = Map.of(
                 "foundBooks", bookDTOs,
                 "genres", genres
         );
@@ -285,13 +303,13 @@ public class LibraryController {
     @PostMapping("/api/addBook/{isbn}/")
     public ResponseEntity<String> addBook(@PathVariable("isbn") Integer isbn, HttpSession session) {
 
-        LibraryMember libraryMember = (LibraryMember) session.getAttribute("actualLibraryMember");
+        final LibraryMember libraryMember = (LibraryMember) session.getAttribute("actualLibraryMember");
 
         if (libraryMember == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in.");
         }
 
-        Book actualBook = service.findBookByISBN(isbn);
+        final Book actualBook = service.findBookByISBN(isbn);
         if (actualBook == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found.");
         }
@@ -312,12 +330,12 @@ public class LibraryController {
     public ResponseEntity<String> removeBook(@PathVariable("isbn") Integer isbn, HttpSession session) {
 
         // Retrieve the actual libraryMember and actual book from the database
-        LibraryMember libraryMember = (LibraryMember) session.getAttribute("actualLibraryMember");
+        final LibraryMember libraryMember = (LibraryMember) session.getAttribute("actualLibraryMember");
         if (libraryMember == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in.");
         }
 
-        Book actualBook = service.findBookByISBN(isbn);
+        final Book actualBook = service.findBookByISBN(isbn);
         // Remove the book from the library member
         service.removeBookFromLibraryMember(actualBook, libraryMember.getId());
 
@@ -325,3 +343,4 @@ public class LibraryController {
 
     }
 }
+

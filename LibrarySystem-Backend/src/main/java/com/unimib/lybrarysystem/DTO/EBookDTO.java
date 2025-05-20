@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Set;
 
 public class EBookDTO extends BookDTO {
+
     private String format;
+    
     private int fileSizeMB;
 
     public EBookDTO(String format, int fileSizeMB) {
@@ -12,7 +14,9 @@ public class EBookDTO extends BookDTO {
         this.fileSizeMB = fileSizeMB;
     }
 
-    public EBookDTO(Integer isbn, String title, String author, String publisher, Set<String> authors, GenreDTO genre, List<Integer> borrowingMemberIds, List<Integer> historianMemberIds, String format, int fileSizeMB) {
+    public EBookDTO(Integer isbn, String title, String author, String publisher, 
+            Set<String> authors, GenreDTO genre, List<Integer> borrowingMemberIds, 
+            List<Integer> historianMemberIds, String format, int fileSizeMB) {
         super(isbn, title, author, publisher, authors, genre, borrowingMemberIds, historianMemberIds);
         this.format = format;
         this.fileSizeMB = fileSizeMB;

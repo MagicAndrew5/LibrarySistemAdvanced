@@ -1,9 +1,13 @@
 package com.unimib.lybrarysystem.model;
 
-import jakarta.persistence.*;
-
-import java.util.HashSet;
-import java.util.Set;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 /**
  * Represents a user in the library system.
@@ -55,7 +59,8 @@ public class User {
      * @param city        The city of the user.
      * @param libraryMember The library member of the user.
      */
-    public User(Integer id, String name, String surname, String username, String email, String password, String phoneNumber, String city, LibraryMember libraryMember) {
+    public User(Integer id, String name, String surname, String username, String email, 
+                String password, String phoneNumber, String city, LibraryMember libraryMember) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -257,3 +262,4 @@ public class User {
                 '}';
     }
 }
+

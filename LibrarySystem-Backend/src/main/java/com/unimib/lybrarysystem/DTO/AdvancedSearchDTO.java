@@ -1,10 +1,12 @@
 package com.unimib.lybrarysystem.DTO;
 
 public class AdvancedSearchDTO {
+
     private String publisher;
+
     private String authorNationality;
 
-    public AdvancedSearchDTO() {}
+    public AdvancedSearchDTO() { }
 
     public AdvancedSearchDTO(String publisher, String authorNationality) {
         this.publisher = publisher;

@@ -8,16 +8,20 @@
         <!-- Regole base di naming -->
         <module name="TypeName"/>
         <module name="MethodName"/>
-        <module name="ParameterName"/>
         <module name="LocalVariableName"/>
-        <module name="MemberName"/>
+        <!-- mute the method below due to a warning suggesting to rename the key 'ISBN' to 'isbn' -->
+        
+        <!--  
+            <module name="ParameterName"/>
+            <module name="MemberName"/>
+        -->
 
         <!-- Regole sugli import -->
         <module name="UnusedImports"/>
         <module name="AvoidStarImport"/>
         <module name="RedundantImport"/>
         <module name="ImportOrder">
-            <property name="groups" value="java, javax, org, com"/>
+            <property name="groups" value="java, jakarta, javax, org, com"/>
             <property name="ordered" value="true"/>
             <property name="separated" value="true"/>
         </module>

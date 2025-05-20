@@ -1,14 +1,15 @@
 package com.unimib.lybrarysystem.mapper;
 
-import com.unimib.lybrarysystem.DTO.BookDTO;
-import com.unimib.lybrarysystem.model.Author;
-import com.unimib.lybrarysystem.model.Book;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+import com.unimib.lybrarysystem.DTO.BookDTO;
+import com.unimib.lybrarysystem.model.Author;
+import com.unimib.lybrarysystem.model.Book;
 
 @Mapper(componentModel = "spring", uses = GenreMapper.class)
 public interface BookMapper {
@@ -20,6 +21,7 @@ public interface BookMapper {
     Book toEntity(BookDTO dto);
 
     List<BookDTO> toDTOList(List<Book> books);
+
     List<Book> toEntityList(List<BookDTO> dtos);
 
     default Set<String> mapStringAuthors(Set<Author> authors) {
@@ -31,10 +33,11 @@ public interface BookMapper {
     default Set<Author> mapAuthors(Set<String> authors) {
         return authors.stream()
                 .map(name -> {
-                    Author author = new Author();
+                    final Author author = new Author();
                     author.setName(name);
                     return author;
                 })
                 .collect(Collectors.toSet());
     }
 }
+

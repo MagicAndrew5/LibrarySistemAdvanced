@@ -1,11 +1,19 @@
 package com.unimib.lybrarysystem.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
 
 /**
  * Represents an author entity in the library system.
@@ -53,7 +61,8 @@ public class Author {
      * @param books         The set of books written by the author.
      * @param collaborators The set of collaborators (other authors) for the author.
      */
-    public Author(Integer id, String name, String surname, String birthDate, String nationality, Set<Book> books, Set<Author> collaborators) {
+    public Author(Integer id, String name, String surname, String birthDate, String nationality, 
+                    Set<Book> books, Set<Author> collaborators) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -223,9 +232,9 @@ public class Author {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Author)) return false;
-        Author author = (Author) o;
+        if (this == o) { return true; }
+        if (!(o instanceof Author)) { return false; }
+        final Author author = (Author) o;
         return Objects.equals(id, author.id) &&
                 Objects.equals(name, author.name) &&
                 Objects.equals(surname, author.surname) &&
@@ -235,16 +244,15 @@ public class Author {
                 Objects.equals(collaborators, author.collaborators);
     }
 
-
-    /**
-     * Returns a hash code value for the object.
+/**
+     * Returns a hash code value for the Author object.
      *
-     * @return A hash code value for this object.
+     * @return A hash code value for this Author.
      */
-    /*
     @Override
     public int hashCode() {
         return Objects.hash(id, name, surname, birthDate, nationality, books, collaborators);
     }
-    */
 }
+
+

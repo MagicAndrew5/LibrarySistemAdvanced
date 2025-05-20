@@ -1,11 +1,12 @@
 package com.unimib.lybrarysystem.mapper;
 
-import com.unimib.lybrarysystem.DTO.AuthorDTO;
-import com.unimib.lybrarysystem.model.Author;
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import java.util.List;
+import com.unimib.lybrarysystem.DTO.AuthorDTO;
+import com.unimib.lybrarysystem.model.Author;
 
 @Mapper(componentModel = "spring")
 public interface AuthorMapper {

@@ -1,7 +1,9 @@
 package com.unimib.lybrarysystem.repository;
 
-import com.unimib.lybrarysystem.model.Author;
 import org.springframework.data.repository.CrudRepository;
+
+import com.unimib.lybrarysystem.model.Author;
+
 
 /**
  * The repository for the author entity.

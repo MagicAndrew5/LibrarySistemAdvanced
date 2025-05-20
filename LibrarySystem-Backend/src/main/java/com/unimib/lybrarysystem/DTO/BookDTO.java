@@ -1,26 +1,28 @@
 package com.unimib.lybrarysystem.DTO;
 
-import com.unimib.lybrarysystem.DTO.GenreDTO;
-import com.unimib.lybrarysystem.mapper.BookMapper;
-import com.unimib.lybrarysystem.model.Book;
-
 import java.util.List;
 import java.util.Set;
 
 public class BookDTO {
 
     private Integer isbn;
+
     private String title;
+
     private String author;
+
     private String publisher;
 
     private Set<String> authors;
+
     private GenreDTO genre;
+
     private List<Integer> borrowingMemberIds;
+
     private List<Integer> historianMemberIds;
 
     // Costruttori
-    public BookDTO() {}
+    public BookDTO() { }
 
     public BookDTO(Integer isbn, String title, String author, String publisher) {
         this.isbn = isbn;
@@ -43,15 +45,19 @@ public class BookDTO {
 
     // Getter e Setter
     public Integer getIsbn() { return isbn; }
+
     public void setIsbn(Integer isbn) { this.isbn = isbn; }
 
     public String getTitle() { return title; }
+
     public void setTitle(String title) { this.title = title; }
 
     public String getAuthor() { return author; }
+
     public void setAuthor(String author) { this.author = author; }
 
     public String getPublisher() { return publisher; }
+
     public void setPublisher(String publisher) { this.publisher = publisher; }
 
     public Set<String> getAuthors() {
@@ -63,13 +69,18 @@ public class BookDTO {
     }
 
     public GenreDTO getGenre() { return genre; }
+
     public void setGenre(GenreDTO genre) { this.genre = genre; }
 
     public List<Integer> getBorrowingMemberIds() { return borrowingMemberIds; }
-    public void setBorrowingMemberIds(List<Integer> borrowingMemberIds) { this.borrowingMemberIds = borrowingMemberIds; }
+
+    public void setBorrowingMemberIds(List<Integer> borrowingMemberIds) 
+    { this.borrowingMemberIds = borrowingMemberIds; }
 
     public List<Integer> getHistorianMemberIds() { return historianMemberIds; }
-    public void setHistorianMemberIds(List<Integer> historianMemberIds) { this.historianMemberIds = historianMemberIds; }
 
-    // Metodo per convertire Book in BookDTO
+    public void setHistorianMemberIds(List<Integer> historianMemberIds) 
+    { this.historianMemberIds = historianMemberIds; }
+
 }
+

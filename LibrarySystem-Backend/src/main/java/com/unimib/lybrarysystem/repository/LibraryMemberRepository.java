@@ -1,9 +1,9 @@
 package com.unimib.lybrarysystem.repository;
 
-import com.unimib.lybrarysystem.model.LibraryMember;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+
+import com.unimib.lybrarysystem.model.LibraryMember;
 
 /**
  * The repository for the library member entity.

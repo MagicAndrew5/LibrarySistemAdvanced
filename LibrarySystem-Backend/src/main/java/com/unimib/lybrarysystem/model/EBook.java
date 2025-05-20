@@ -1,10 +1,12 @@
 package com.unimib.lybrarysystem.model;
 
+import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
-import java.util.List;
-import java.util.Set;
+
 
 /**
  * Represents an electronic book entity in the library system.
@@ -12,7 +14,9 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("EBook")
 public class EBook extends Book {
+
     private String format;
+
     private int fileSizeMB;
 
     /**
@@ -96,3 +100,4 @@ public class EBook extends Book {
                 '}';
     }
 }
+
