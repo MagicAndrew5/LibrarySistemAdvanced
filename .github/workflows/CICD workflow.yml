@@ -75,6 +75,17 @@ jobs:
         working-directory: LibrarySystem-Backend
         run: ./mvnw spotbugs:check
 
+      # 7. Esegue SonarQube Scanner per analisi qualità completa
+      - name: Run SonarQube Analysis
+        working-directory: LibrarySystem-Backend
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./mvnw sonar:sonar \
+          -Dsonar.projectKey=${{ secrets.SONAR_KEY_PROJECT }} \
+          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.java.spotbugs.reportPaths=target/spotbugs/spotbugs.xml
+
       # 7. Genera report di copertura codice con JaCoCo
       - name: Generate Coverage Report
         working-directory: LibrarySystem-Backend

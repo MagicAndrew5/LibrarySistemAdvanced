@@ -38,6 +38,9 @@ public class LibraryService {
             libraryMember.setName(user.getName());
             libraryMember.setSurname(user.getSurname());
 
+            //final SecureRandom secureRandom = new SecureRandom();
+            //final int randomValue = secureRandom.nextInt(9000000);
+
             final Random random = new Random();
             final int randomId = random.nextInt(900000000) + 100000000;
             libraryMember.setId(randomId);
