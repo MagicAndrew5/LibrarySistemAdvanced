@@ -29,17 +29,17 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Wait for MySQL
-        run: |
-          echo "Waiting for MySQL..."
-          for i in {1..30}; do
-            if mysqladmin ping -h 127.0.0.1 -u ${{ secrets.MYSQL_DB_USERNAME }} -p${{ secrets.MYSQL_DB_PASSWORD }} --silent; then
-              echo "MySQL is ready!"
-              exit 0
-            fi
-            echo "Still waiting ($i)..."
-            sleep 2
-          done
+      #- name: Wait for MySQL
+      #  run: |
+      #    echo "Waiting for MySQL..."
+      #    for i in {1..30}; do
+      #      if mysqladmin ping -h 127.0.0.1 -u ${{ secrets.MYSQL_DB_USERNAME }} -p${{ secrets.MYSQL_DB_PASSWORD }} --silent; then
+      #        echo "MySQL is ready!"
+      #       exit 0
+      #      fi
+      #      echo "Still waiting ($i)..."
+      #      sleep 2
+      #    done
 
       - name: Build & Test Backend
         working-directory: LibrarySystem-Backend
@@ -81,7 +81,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: spotbugs-report
-          path: LibrarySystem-Backend/target/spotbugsXml.xml
+          path: LibrarySystem-Backend/target
 
   # === SONARQUBE ===
   sonar:
@@ -94,6 +94,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: spotbugs-report
+          path: LibrarySystem-Backend/target
 
       - name: Run SonarQube Analysis
         working-directory: LibrarySystem-Backend
