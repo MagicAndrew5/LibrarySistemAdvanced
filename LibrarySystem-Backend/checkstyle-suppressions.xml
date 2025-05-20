@@ -17,5 +17,5 @@
     <suppress checks="EqualsHashCode"
               files="Author.java"
               lines="233"/>
-
+    <suppress files="target/generated-sources/.*\.java" checks=".*"/>
 </suppressions>
