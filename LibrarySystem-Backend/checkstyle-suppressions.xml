@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+        "-//Checkstyle//DTD SuppressionFilter Configuration 1.0//EN"
+        "https://checkstyle.org/dtds/suppressions_1_0.dtd">
+
+<suppressions>
+    <suppress checks="ParameterName"
+              files="Book.java"
+              lines="85,119"/>
+    <suppress checks="ParameterName"
+              files="EBook.java"
+              lines="36"/>
+    <suppress checks="MemberName"
+              files="Book.java"
+              lines="33"/>
+</suppressions>

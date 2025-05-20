@@ -11,11 +11,8 @@
         <module name="LocalVariableName"/>
 
         <!-- mute the method below due to a warning suggesting to rename the key 'ISBN' to 'isbn' -->
-        
-        <!--  
-            <module name="ParameterName"/>
-            <module name="MemberName"/>
-        -->
+        <module name="ParameterName"/>
+        <module name="MemberName"/>
 
         <!-- Regole sugli import -->
         <module name="UnusedImports"/>
