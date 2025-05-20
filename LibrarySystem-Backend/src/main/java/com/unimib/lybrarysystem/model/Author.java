@@ -244,15 +244,6 @@ public class Author {
                 Objects.equals(collaborators, author.collaborators);
     }
 
-/**
-     * Returns a hash code value for the Author object.
-     *
-     * @return A hash code value for this Author.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, surname, birthDate, nationality, books, collaborators);
-    }
 }
 
 

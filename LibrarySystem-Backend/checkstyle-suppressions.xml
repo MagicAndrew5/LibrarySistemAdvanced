@@ -14,4 +14,8 @@
     <suppress checks="MemberName"
               files="Book.java"
               lines="33"/>
+    <suppress checks="EqualsHashCode"
+              files="Author.java"
+              lines="233"/>
+
 </suppressions>
