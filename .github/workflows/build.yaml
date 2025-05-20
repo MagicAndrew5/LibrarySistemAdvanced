@@ -33,7 +33,8 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/LibrarySystem-Backend/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
+        working-directory: ./LibrarySystem-Backend
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MagicAndrew5_LibrarySistemAdvanced_3f088236-e914-4809-8bb9-bb9eda509d63 -Dsonar.projectName='LibrarySistemAdvanced'
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MagicAndrew5_LibrarySistemAdvanced_3f088236-e914-4809-8bb9-bb9eda509d63 -Dsonar.projectName='LibrarySistemAdvanced' -Dsonar.java.spotbugs.reportPaths=target/spotbugs/spotbugs.xml
