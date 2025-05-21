@@ -76,6 +76,7 @@ jobs:
       - name: Run Spotbugs
         working-directory: LibrarySystem-Backend
         run: ./mvnw spotbugs:spotbugs
+        # run: ./mvnw spotbugs:check
 
       - name: List Target Directory (Debug)
         working-directory: LibrarySystem-Backend
@@ -85,7 +86,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: spotbugs.html
-          path: LibrarySystem-Backend/target/
+          path: LibrarySystem-Backend/target/spotbugs-reports/
 
   # === SONARQUBE ===
   sonar:
@@ -111,8 +112,8 @@ jobs:
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
             -Dmaven.test.skip=true \
-            -Dsonar.java.spotbugs.reportPaths=target/spotbugsXml.xml
-          # -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml \
+            -Dsonar.java.spotbugs.reportPaths=target/spotbugs-reports/spotbugs.xml \
+            -Dsonar.java.checkstyle.reportPaths=target/checkstyle-report/checkstyle-result.html
   # === JACOCO ===
   coverage:
     runs-on: ubuntu-latest

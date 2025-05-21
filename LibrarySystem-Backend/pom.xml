@@ -126,11 +126,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <configLocation>checkstyle.xml</configLocation>
-                    <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
-                    <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
-                    <outputFile>${project.build.directory}/checkstyle-report/checkstyle-result.xml</outputFile>
-                    <outputFileFormat>xml</outputFileFormat>
+                    <configLocation>src/config/checkstyle/checkstyle.xml</configLocation>
+                    <suppressionsLocation>src/config/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+                    <outputDirectory>${project.build.directory}/checkstyle-report/</outputDirectory>
+                    <outputFile>${project.build.directory}/checkstyle-report/checkstyle-result.html</outputFile>
                 </configuration>
             </plugin>
 
@@ -154,9 +153,7 @@
                     <effort>Max</effort>
                     <threshold>Low</threshold>
                     <xmlOutput>true</xmlOutput>
-                    <htmlOutput>true</htmlOutput>
-                    <xmlOutputDirectory>${project.build.directory}</xmlOutputDirectory>
-                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <xmlOutputDirectory>${project.build.directory}/spotbugs-report/</xmlOutputDirectory>
                     <plugins>
                         <plugin>
                             <groupId>com.h3xstream.findsecbugs</groupId>
@@ -202,7 +199,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
-                    <failOnError>false</failOnError>
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
@@ -227,8 +223,8 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
-                    <configLocation>checkstyle.xml</configLocation>
-                    <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+                    <configLocation>target/checkstyle-report/checkstyle-checker.xml</configLocation>
+                    <suppressionsLocation>target/checkstyle-report/checkstyle-suppressions.xml</suppressionsLocation>
                 </configuration>
             </plugin>
         </plugins>
