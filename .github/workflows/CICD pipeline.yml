@@ -80,8 +80,8 @@ jobs:
       - name: Upload SpotBugs Report
         uses: actions/upload-artifact@v4
         with:
-          name: spotbugsXml.xml
-          path: LibrarySystem-Backend/target/spotbugs/spotbugs-result/spotbugsXml.xml
+          name: spotbugs-result.xml
+          path: LibrarySystem-Backend/target/spotbugs/
 
   # === SONARQUBE ===
   sonar:
@@ -93,8 +93,8 @@ jobs:
       - name: Download SpotBugs Report
         uses: actions/download-artifact@v4
         with:
-          name: spotbugsXml.xml
-          path: LibrarySystem-Backend/target/spotbugs/spotbugs-result/
+          name: spotbugs-result.xml
+          path: LibrarySystem-Backend/target/spotbugs/
 
       - name: Run SonarQube Analysis
         working-directory: LibrarySystem-Backend

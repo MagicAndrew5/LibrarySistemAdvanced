@@ -154,8 +154,8 @@
                     <threshold>Low</threshold>
                     <xmlOutput>true</xmlOutput>
                     <htmlOutput>true</htmlOutput>
-                    <xmlOutputDirectory>${project.build.directory}/spotbugs/spotbugs-result</xmlOutputDirectory>
-                    <outputDirectory>${project.build.directory}/spotbugs/spotbugs-result</outputDirectory>
+                    <xmlOutputDirectory>${project.build.directory}/spotbugs/spotbugs-result.xml</xmlOutputDirectory>
+                    <outputDirectory>${project.build.directory}/spotbugs/spotbugs-result.html</outputDirectory>
                     <plugins>
                         <plugin>
                             <groupId>com.h3xstream.findsecbugs</groupId>
