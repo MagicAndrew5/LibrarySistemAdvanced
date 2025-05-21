@@ -110,6 +110,7 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_KEY_PROJECT }} \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
+            -Dmaven.test.skip=true \
             -Dsonar.java.spotbugs.reportPaths=target/spotbugsXml.xml
 
   # === JACOCO ===
