@@ -109,8 +109,7 @@ jobs:
           ./mvnw -B verify sonar:sonar \
             -Dsonar.projectKey=${{ secrets.SONAR_KEY_PROJECT }} \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-            -Dsonar.java.binaries=target/classes \
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.java.spotbugs.reportPaths=target/spotbugsXml.xml
 
   # === JACOCO ===
