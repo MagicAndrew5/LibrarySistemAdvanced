@@ -94,11 +94,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download SpotBugs Report
-        uses: actions/download-artifact@v4
-        with:
-          name: spotbugs.html
-          path: LibrarySystem-Backend/target
+      #- name: Download SpotBugs Report
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: spotbugs.html
+      #    path: LibrarySystem-Backend/target/
 
       - name: Run SonarQube Analysis
         working-directory: LibrarySystem-Backend
