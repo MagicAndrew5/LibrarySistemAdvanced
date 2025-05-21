@@ -112,7 +112,7 @@ jobs:
             -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
             -Dmaven.test.skip=true \
             -Dsonar.java.spotbugs.reportPaths=target/spotbugsXml.xml
-
+          # -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml \
   # === JACOCO ===
   coverage:
     runs-on: ubuntu-latest
