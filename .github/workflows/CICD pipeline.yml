@@ -110,7 +110,7 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_KEY_PROJECT }} \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-            -Dsonar.java.spotbugs.reportPaths=target/spotbugsXml.xml
+            -Dsonar.java.spotbugs.reportPaths=target/spotbugs.html
 
   # === JACOCO ===
   coverage:
