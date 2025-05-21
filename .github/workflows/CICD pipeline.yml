@@ -97,7 +97,7 @@ jobs:
       - name: Download SpotBugs Report
         uses: actions/download-artifact@v4
         with:
-          name: spotbugs-report
+          name: spotbugs.html
           path: LibrarySystem-Backend/target
 
       - name: Run SonarQube Analysis
