@@ -84,8 +84,8 @@ jobs:
       - name: Upload SpotBugs Report
         uses: actions/upload-artifact@v4
         with:
-          name: spotbugs-report
-          path: LibrarySystem-Backend/target/spotbugsXml.xml
+          name: spotbugs.html
+          path: LibrarySystem-Backend/target/
 
   # === SONARQUBE ===
   sonar:
@@ -110,6 +110,7 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_KEY_PROJECT }} \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dsonar.java.binaries=target/classes \
             -Dsonar.java.spotbugs.reportPaths=target/spotbugs.html
 
   # === JACOCO ===
