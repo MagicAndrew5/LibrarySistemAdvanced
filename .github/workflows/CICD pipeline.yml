@@ -114,6 +114,7 @@ jobs:
             -Dmaven.test.skip=true \
             -Dsonar.java.spotbugs.reportPaths=target/spotbugs-reports/spotbugs.xml \
             -Dsonar.java.checkstyle.reportPaths=target/checkstyle-report/checkstyle-result.html
+            
   # === JACOCO ===
   coverage:
     runs-on: ubuntu-latest
