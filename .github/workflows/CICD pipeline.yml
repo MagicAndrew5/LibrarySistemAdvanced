@@ -115,7 +115,7 @@ jobs:
             -Dsonar.java.spotbugs.reportPaths=target/spotbugs-reports/spotbugs.xml \
             -Dsonar.java.checkstyle.reportPaths=target/checkstyle-report/checkstyle-result.html
             
-  # === JACOCO ===
+  # === JACOCO TEST ===
   coverage:
     runs-on: ubuntu-latest
     needs: build-backend
