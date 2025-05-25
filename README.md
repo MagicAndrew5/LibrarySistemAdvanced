@@ -3,7 +3,6 @@
 This project is a Library Management System implemented using **Java/Spring Boot** for the backend and **Angular** for the frontend. The system allows for the management of books, authors, genres, and library members, supporting CRUD operations, advanced searches, and multi-user interactions through a modern web interface.
 
 ## Table of Contents
-
 - [Library Management System](#library-management-system)
   - [Table of Contents](#table-of-contents)
   - [Technologies Used](#technologies-used)
