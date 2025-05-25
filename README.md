@@ -172,7 +172,7 @@ These components collectively contribute to the efficient development, testing, 
 1. **Start the backend** (Spring Boot) as described in [Installation](#installation).
 2. **Start the frontend** (Angular) in a separate terminal:
    ```bash
-   cd frontend && ng serve
+   cd LibrarySystem-Frontend && ng serve
 
 ## Contributors
 
