@@ -1,4 +1,21 @@
 # -----------------------------------------------------
+# 🔧 IDEs and editors
+# -----------------------------------------------------
+.idea/
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# -----------------------------------------------------
 # 💻 File di sistema (OS)
 # -----------------------------------------------------
 .DS_Store
