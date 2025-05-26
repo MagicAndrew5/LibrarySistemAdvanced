@@ -1,8 +1,8 @@
-📂 LibrarySystem-Backend
+# 📂 LibrarySystem-Backend
 
 This project was generated using [Spring Boot](https://github.com/spring-projects/spring-boot) version 4.0.0.
 
-🗃️ Entities
+## 🗃️ Entities
 
 The system includes the following entities:
 
@@ -22,7 +22,7 @@ The system includes the following relationships between entities:
 - **Many-to-One**: A book has one genre, but a genre can be associated with many books.
 - **Many-to-Many**: A library member can borrow multiple books and a book can be borrowed by multiple library members.
 
-🧩 Operations
+## 🧩 Operations
 
 The system supports the following operations:
 
@@ -32,7 +32,7 @@ The system supports the following operations:
 - **Delete**: Remove books, authors, genres, and library members from the system.
 - **Search**: Search for books with a specific title and author. Ability to search for EBooks. Search for books by doing a more advanced search by passing as a parameter the nationality of the author and the publisher of the book.
 
-🏗️ Installation
+## 🏗️ Installation
 
 This project uses [GitHub](https://github.com/) for version control and manages the database configuration through an ignored `application.properties` file for security reasons. To successfully run the project, you need to create a local copy of the `application.properties` file with the correct database information.
 
@@ -57,7 +57,7 @@ This project uses [GitHub](https://github.com/) for version control and manages 
     - Open your browser and go to [http://localhost:8080](http://localhost:8080) to verify that the application is running correctly.
 
 
-🗂️ Others Folder
+## 🗂️ Others Folder
 
 The `others` folder contains scripts that generate various data for the project. These scripts are written in Python and are organized in the `generatevalue` subfolder. Here's a brief overview of each script:
 
@@ -79,7 +79,7 @@ Also encompasses various elements contributing to a comprehensive understanding 
 
 These components collectively contribute to the efficient development, testing, and documentation of the project. For further details on each script or additional elements, refer to the specific subfolders within `others`.
 
-💡 Additional Notes
+## 💡 Additional Notes
 
 - Never share the `application.properties` file with your database credentials in the repository. Add the file to your `.gitignore` to avoid tracking.
 - For further details on Spring Boot configuration, refer to [the official documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/).
