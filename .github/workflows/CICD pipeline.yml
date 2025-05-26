@@ -34,7 +34,7 @@ jobs:
         run: |
           echo "Waiting for MySQL..."
           for i in {1..30}; do
-            if mysqladmin ping -h 127.0.0.1 -u${{ secrets.MYSQL_DB_USERNAME }} -p${{ secrets.MYSQL_DB_PASSWORD }} --silent; then
+            if mysql ping -h 127.0.0.1 -u${{ secrets.MYSQL_DB_USERNAME }} -p${{ secrets.MYSQL_DB_PASSWORD }} --silent; then
               echo "MySQL is ready!"
               exit 0
             fi
