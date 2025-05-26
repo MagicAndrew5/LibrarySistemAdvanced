@@ -16,6 +16,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_DATABASE: ${{ secrets.MYSQL_DB_NAME }}
+          MYSQL_USERNAME: ${{ secrets.MYSQL_DB_USERNAME }}
           MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_DB_PASSWORD }}
         ports:
           - '3306:3306'
@@ -33,14 +34,14 @@ jobs:
         run: |
           echo "Waiting for MySQL..."
           for i in {1..30}; do
-            if mysqladmin ping -h 127.0.0.1 -u ${{ secrets.MYSQL_DB_USERNAME }} -p${{ secrets.MYSQL_DB_PASSWORD }} --silent; then
+            if mysqladmin ping -h 127.0.0.1 -u${{ secrets.MYSQL_DB_USERNAME }} -p${{ secrets.MYSQL_DB_PASSWORD }} --silent; then
               echo "MySQL is ready!"
-             exit 0
+              exit 0
             fi
             echo "Still waiting ($i)..."
             sleep 2
           done
-
+        
       - name: Build & Test Backend
         working-directory: LibrarySystem-Backend
         env:
